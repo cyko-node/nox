@@ -7,10 +7,27 @@
   "type": "commonjs",
   "private": true,
   "license": "GPL-3.0-or-later",
-  "author": "cyko@eggheadedmonkey.com",
-  "maintainers": [ "eggheadedmonkey" ],
-  "contributors": [ "eggheadedmonkey" ],
+  "author": {
+    "name": "eggheadedmonkey",
+    "email": "cyko@eggheadedmonkey.com"
+  },
   "scripts": {
     "test": "node main.js test"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyko-node/nox.git"
+  },
+  "maintainers": [
+    {
+      "name": "eggheadedmonkey",
+      "email": "cyko@eggheadedmonkey.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "eggheadedmonkey",
+      "email": "cyko@eggheadedmonkey.com"
+    }
+  ]
 }
