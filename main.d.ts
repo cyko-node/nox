@@ -1,12 +1,16 @@
 /**
- * Cyko: **N**ode **O**bjective e**X**tensions
+ * Cyko: **No**de e**X**tensions
  *
  * ---
  *
- * Collection of simple and safe objective utilities.
+ * Collection of simple and safe utilities.
+ *
+ * > ---
  *
  * - Object property queries
  * - Object property access
+ *
+ * > ---
  *
  * - Value conversions
  *
@@ -15,34 +19,29 @@
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
+
 declare module "nox" {
 
   /**
-   * Objective representation of the **package.json** contents.
+   * Get an objective representation of the **package.json** contents.
    *
    * ```
-   * // object structure
    * interface example {
    *   name: string;
    *   version: string;
    *   description: string;
-   *   main: string;
-   *   private: boolean;
    *   keywords: string[ ... ];
    *   license: string;
-   *   author: string|person;
+   *   author: string | { name: string; email: string; };
+   *   config: { ...; };
    *   scripts: { ...; };
    *   dependencies: { ...; };
    *   repository: { type: string; url: string; };
-   *   maintainers: [ string|person, ... ];
-   *   contributors: [ string|person, ... ];
    * }
-   * // author, maintainers, contributors
-   * interface person { name: string; email: string; }
    * ```
    */
 
-  function package(): object
+  function package(): object;
 
   /* ----------------------------------------------------------------------- */
 
@@ -55,7 +54,7 @@ declare module "nox" {
    * @param key `name`
    */
 
-  function has(obj: object, key: string): boolean
+  function has(obj: object, key: string): boolean;
 
   /**
    * `object` has a functional property (method) with the specified `name` ?
@@ -66,12 +65,12 @@ declare module "nox" {
    * @param key `name`
    */
 
-  function fas(obj: object, key: string): boolean
+  function fas(obj: object, key: string): boolean;
 
   /**
    * Get the `object` property `name`.
    *
-   * ---
+   * > ---
    *
    * Selects between `object[name]` and `default` based upon weather the
    * `object` {@link has has} a property with the specified `name`.
@@ -83,7 +82,7 @@ declare module "nox" {
    * @param def `default` = `null`
    */
 
-  function get(obj: object, key: string, def: any = null): any
+  function get(obj: object, key: string, def?: any): any;
 
   /* ----------------------------------------------------------------------- */
 
@@ -95,7 +94,7 @@ declare module "nox" {
    * @param val `value`
    */
 
-  function string(val: any): string
+  function string(val: any): string;
 
   /**
    * Convert a `value` of *any* type to an **integer**.
@@ -114,6 +113,6 @@ declare module "nox" {
    * @param val `value`
    */
 
-  function int(val: any): number
+  function int(val: any): number;
 
 }

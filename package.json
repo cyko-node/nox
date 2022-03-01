@@ -1,6 +1,6 @@
 {
   "name": "nox",
-  "description": "Cyko: Node Objective eXtensions",
+  "description": "Cyko: Node eXtensions",
   "version": "0.0.1",
   "main": "main.js",
   "types": "main.d.ts",
@@ -12,7 +12,7 @@
     "email": "cyko@eggheadedmonkey.com"
   },
   "scripts": {
-    "test": "node main.js test"
+    "test": "node main.js test 1"
   },
   "repository": {
     "type": "git",
