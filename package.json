@@ -1,7 +1,7 @@
 {
   "name": "nox",
   "description": "Cyko: Node eXtensions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "main.js",
   "types": "main.d.ts",
   "type": "commonjs",
@@ -12,6 +12,7 @@
     "email": "cyko@eggheadedmonkey.com"
   },
   "scripts": {
+    "init": "npm install --save-dev @types/node",
     "test": "node main.js test 1"
   },
   "repository": {

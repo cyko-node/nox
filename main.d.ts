@@ -1,11 +1,9 @@
 /**
- * Cyko: **No**de e**X**tensions
- *
- * ---
- *
- * Collection of simple and safe utilities.
+ * Cyko - **No**de e**X**tensions
  *
  * > ---
+ *
+ * Collection of simple and safe utilities.
  *
  * - Object property queries
  * - Object property access
@@ -19,7 +17,7 @@
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
-
+//declare const nox: nox.Nox;
 declare module "nox" {
 
   /**
