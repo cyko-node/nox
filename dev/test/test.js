@@ -34,7 +34,7 @@ const cfg = {
  * Test: command-line number.
  */
 
-const num = {
+const cmd = {
   1: {
     info: 'functionality (basics)',
     test: [
@@ -54,10 +54,10 @@ if (x) {
 
   switch (x) {
     case 1||2||3||4||5||6||7||8||9: {
-      out(`@ ${pkg.name}:test[${x}]`, num[x].info, '...')
+      out(`@ ${pkg.name}:test[${x}]`, cmd[x].info, '...')
       out()
 
-      num[x].test.forEach((fun) => {
+      cmd[x].test.forEach((fun) => {
         out()
         out('#', cfg[fun].info)
         out('> ---------')
