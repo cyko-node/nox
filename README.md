@@ -2,7 +2,7 @@
 
 ---
 
-Collection of simple and safe utilities.
+> Collection of simple and safe utilities.
 
 ---
 
