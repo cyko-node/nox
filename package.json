@@ -13,7 +13,7 @@
   },
   "scripts": {
     "init": "npm install --save-dev @types/node",
-    "test": "node main.js test 1"
+    "test": "node dev/test/test.js test 1"
   },
   "repository": {
     "type": "git",

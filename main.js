@@ -39,11 +39,12 @@ exports.int = function(val) {
  *
  * > ---
  *
- * `npm this_file.js <test> <[1-9]>`
- */
+ * `node this_file.js <test> <[1-9]>`
+ *
 
 const test = process.argv.includes('test', 2) ? process.argv.at(3) : false
 
 if (test) {
   require('./dev/test').run(this, Number(test))
 }
+*/

@@ -43,12 +43,18 @@ const num = {
   }
 }
 
-exports.run = function(mod, x, out = console.debug) {
+const x = process.argv.includes('test', 2)
+  ? Number(process.argv.at(3))
+  : false
+
+if (x) {
+  const out = console.debug
+  const mod = require('../../main')
   const pkg = mod.package()
 
   switch (x) {
     case 1||2||3||4||5||6||7||8||9: {
-      out(`@ test[${x}]`, num[x].info, '...')
+      out(`@ ${pkg.name}:test[${x}]`, num[x].info, '...')
       out()
 
       num[x].test.forEach((fun) => {
@@ -61,18 +67,11 @@ exports.run = function(mod, x, out = console.debug) {
       })
 
       out()
-      out(`@ test[${x}] done.`)
+      out(`@ ${pkg.name}:test[${x}] done.`)
     } break;
 
     default: {
-      console.error(`@ test[${x}] unknown!`)
+      console.error(`@ ${pkg.name}:test[${x}] unknown!`)
     } break;
   }
 }
-
-/*
-const run = function(...)
-module.exports = {
-  run
-}
-*/
