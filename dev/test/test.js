@@ -49,8 +49,8 @@ const x = process.argv.includes('test', 2)
 
 if (x) {
   const out = console.debug
-  const mod = require('../../lib/main')
-  const pkg = mod.package()
+  const nox = require('../../lib/main')
+  const pkg = nox.package()
 
   switch (x) {
     case 1||2||3||4||5||6||7||8||9: {
@@ -62,16 +62,18 @@ if (x) {
         out('#', cfg[fun].info)
         out('> ---------')
         cfg[fun].args.forEach((arg) => {
-          out(`> ${pkg.name}.${fun}(${arg.s}):`, mod[fun](...arg.v))
+          out(`> ${pkg.name}.${fun}(${arg.s}):`, nox[fun](...arg.v))
         })
       })
 
       out()
       out(`@ ${pkg.name}:test[${x}] done.`)
-    } break;
+    } break
 
     default: {
       console.error(`@ ${pkg.name}:test[${x}] unknown!`)
-    } break;
+    } break
   }
 }
+
+/** */

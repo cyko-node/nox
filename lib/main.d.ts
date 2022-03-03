@@ -114,3 +114,6 @@ declare module "nox" {
   function int(val: any): number;
 
 }
+
+/** */
+/** */
