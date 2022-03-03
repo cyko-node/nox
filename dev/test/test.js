@@ -68,10 +68,10 @@ if (x) {
 
       out()
       out(`@ ${pkg.name}:test[${x}] done.`)
-    } break;
+    } break
 
     default: {
       console.error(`@ ${pkg.name}:test[${x}] unknown!`)
-    } break;
+    } break
   }
 }

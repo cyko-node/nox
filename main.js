@@ -34,17 +34,128 @@ exports.int = function(val) {
 
 /* ------------------------------------------------------------------------- */
 
-/**
- * TESTS ...
- *
- * > ---
- *
- * `node this_file.js <test> <[1-9]>`
- *
+class x {
+  #data = {
+    boolean:   1.1, // typeof
 
-const test = process.argv.includes('test', 2) ? process.argv.at(3) : false
+    string:    2.1, // typeof
 
-if (test) {
-  require('./dev/test').run(this, Number(test))
+    number:    3.0, // typeof
+    float:     3.2,
+    integer:   3.3,
+
+    bigint:    4.1, // typeof
+
+    object:    5.1, // typeof
+    array:     5.2,
+
+    symbol:    6.1, // typeof
+
+    undefined: 9.1, // typeof
+    null:      9.2,
+  }
+
+  #name
+
+  #tame(val, str = typeof(val)) {
+    switch (str) {
+      case 'object': {
+        if (val === null) {
+          return 'null'
+        } else {
+          return Array.isArray(val) ? 'array' : str
+        }
+      }
+
+      default: {
+        return str
+      }
+    }
+  }
+
+  constructor(val) {
+    this.#name = this.#tame(val)
+  }
+
+  get name() {
+    return this.#name
+  }
 }
-*/
+
+const a = [
+  {
+    s: '',
+    i: 9,
+    n: 1.9,
+    b: false,
+    a: [],
+    o: {},
+    m: () => {},
+    u: null,
+  }, {
+    s: "",
+    a: [ null ],
+    i: 0,
+    c: x,
+    m: function() {},
+    x: Infinity,
+  }, {
+    s: ``,
+    c: new x(1),
+  },
+]
+
+function iscls(v) {
+  let r = false
+  if (v != null) {
+    if (Boolean(v.constructor)) {
+      const s = String(v.constructor).substring(0, 5)
+      console.log(`:c:${s}`)
+      r = s === 'class'
+    }
+
+    if (v.prototype === undefined) {
+      console.log(`:p:undefined`)
+    } else {
+      if (Boolean(v.prototype.constructor)) {
+        const s = String(v.prototype.constructor).substring(0, 5)
+        console.log(`:p:${s}`)
+        r = s === 'class'
+      }
+    }
+  }
+
+  return r
+}
+
+a.forEach((o) => {
+  console.log('----------')
+  console.log()
+
+  for (const k in o) {
+    if (Object.prototype.hasOwnProperty.call(o, k)) {
+      const v = o[k]
+      const t = new x(v)
+
+      console.log(`type:v:(${k}):`, v)
+      console.log(`typeof:(${k}):`, typeof v)
+      console.log(`type:n:(${k}):`, t.name)
+      console.log(`isclass(${k}):`, iscls(o[k]))
+      console.log()
+
+      if (v != null) {
+        if (Boolean(v.constructor)) {
+          const u = String(v.constructor)//.substring(0, 5)
+          console.log('[class]:', u)
+        }
+
+        if (v.prototype != undefined) {
+          if (Boolean(v.prototype.constructor)) {
+            const u = String(v.prototype.constructor)//.substring(0, 5)
+            console.log('[proto]:', u)
+          }
+        }
+      }
+    }
+  }
+})
