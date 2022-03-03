@@ -49,7 +49,7 @@ const x = process.argv.includes('test', 2)
 
 if (x) {
   const out = console.debug
-  const mod = require('../../main')
+  const mod = require('../../lib/main')
   const pkg = mod.package()
 
   switch (x) {
