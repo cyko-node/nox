@@ -1,9 +1,8 @@
 {
-  "name": "nox",
-  "description": "Cyko: Node eXtensions",
-  "version": "0.0.2",
-  "main": "lib/nox.js",
-  "types": "lib/nox.d.ts",
+  "name": "nox-test",
+  "description": "Cyko: Node eXtensions (test)",
+  "version": "0.0.1",
+  "main": "test.js",
   "type": "commonjs",
   "private": true,
   "license": "GPL-3.0-or-later",
@@ -13,11 +12,10 @@
   },
   "scripts": {
     "init": "npm install --save-dev @types/node",
-    "test": "node dev/test/test.js test 1"
+    "test": "node test.js test 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cyko-node/nox.git"
+  "dependencies": {
+    "nox": "file:../.."
   },
   "maintainers": [
     {

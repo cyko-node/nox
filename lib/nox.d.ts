@@ -5,20 +5,20 @@
  *
  * Collection of simple and safe utilities.
  *
- * - Object property queries
- * - Object property access
+ * + Object property queries
+ * + Object property access
  *
  * > ---
  *
- * - Value conversions
+ * + Data conversion
+ * + Type properties
  *
  * ---
  *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
-//declare const nox: nox.Nox;
-declare module "nox" {
+declare module 'nox' {
 
   /**
    * Get an objective representation of the **package.json** contents.
@@ -35,7 +35,7 @@ declare module "nox" {
    *   scripts: { ...; };
    *   dependencies: { ...; };
    *   repository: { type: string; url: string; };
-   * }
+   * };
    * ```
    */
 
@@ -44,36 +44,19 @@ declare module "nox" {
   /* ----------------------------------------------------------------------- */
 
   /**
-   * `object` has a property with the specified `name` ?
+   * Determines whether an `object` includes a certain `property`.
    *
-   * ---
-   *
-   * @param obj `object`
-   * @param key `name`
+   * @param obj The `object` to search.
+   * @param key The `property` to search for.
    */
 
-  function has(obj: object, key: string): boolean;
-
-  /**
-   * `object` has a functional property (method) with the specified `name` ?
-   *
-   * ---
-   *
-   * @param obj `object`
-   * @param key `name`
-   */
-
-  function fas(obj: object, key: string): boolean;
+  function has(obj: object, key: string | number): boolean;
 
   /**
    * Get the `object` property `name`.
    *
-   * > ---
-   *
    * Selects between `object[name]` and `default` based upon weather the
    * `object` {@link has has} a property with the specified `name`.
-   *
-   * ---
    *
    * @param obj `object`
    * @param key `name`
@@ -85,14 +68,12 @@ declare module "nox" {
   /* ----------------------------------------------------------------------- */
 
   /**
-   * Convert a `value` of *any* type to a **string**.
-   *
-   * ---
+   * Convert `value` of any type to a **string**.
    *
    * @param val `value`
    */
 
-  function string(val: any): string;
+  function string(val: any[]): string;
 
   /**
    * Convert a `value` of *any* type to an **integer**.
@@ -106,14 +87,24 @@ declare module "nox" {
    * nox.int('Infinity') //  Infinity
    * ```
    *
-   * ---
-   *
    * @param val `value`
    */
 
   function int(val: any): number;
 
-}
 
-/** */
-/** */
+  declare namespace to {
+    function string(val: any[]): string;
+    function int(val: any | any[]): number;
+  };
+
+  declare namespace is {
+    function array(val: any): boolean;
+    function boolean(val: any): boolean;
+    function method(val: any): boolean;
+    function number(val: any): boolean;
+    function object(val: any): boolean;
+    function string(val: any): boolean;
+  };
+
+};

@@ -1,3 +1,20 @@
+const nox = require('nox')
+const pkg = nox.package()
+
+/**
+ * Test: helpers...
+ */
+
+class C {
+  v = 0
+  f() {}
+}
+
+const c = new C
+const o = {
+  v: 1,
+  f: function() {}
+}
 
 /**
  * Test: configurations
@@ -6,28 +23,63 @@
 const cfg = {
   int: {
     info: 'convert to <number(integral)>',
+    name: 'int',
+    func: nox.int,
     args: [
-      { s: "''",                    v: [ '' ] },
-      { s: "'123'",                 v: [ '123' ] },
-      { s: "'abc'",                 v: [ 'abc' ] },
-      { s: "'123abc'",              v: [ '123abc' ] },
-      { s: "'-321'",                v: [ '-321' ] },
-      { s: "'123.321'",             v: [ '123.321' ] },
-      { s: "'-321.123'",            v: [ '-321.123' ] },
-      { s: "'12345678901'",         v: [ '12345678901' ] },
-      { s: "'1234567890123456789'", v: [ '1234567890123456789' ] },
-      { s: "[ ]",                   v: [ [] ] },
-      { s: "[ 1 ]",                 v: [ [ 1 ] ] },
-      { s: "[ 1, 2 ]",              v: [ [ 1, 2 ] ] },
-      { s: "[ 1, 2, 3 ]",           v: [ [1, 2, 3 ] ] },
-      { s: "[ 3 ]",                 v: [ [ 3 ] ] },
-      { s: "[ 'a' ]",               v: [ [ 'a' ] ] },
-      { s: "[ '1' ]",               v: [ [ '1' ] ] },
-      { s: "[ '3' ]",               v: [ [ '3'] ] },
-      { s: "[ 3, '2' ]",            v: [ 3, '2' ] },
-      { s: "[ 123 ]",               v: [ 123 ] },
+      [ '' ],
+      [ '123' ],
+      [ 'abc' ],
+      [ '123abc' ],
+      [ '-321' ],
+      [ '123.321' ],
+      [ '-321.123' ],
+      [ '12345678901' ],
+      [ '1234567890123456789' ],
+      [ [] ],
+      [ [ 1 ] ],
+      [ [ 1, 2 ] ],
+      [ [ 1, 2, 3 ] ],
+      [ [ 3 ] ],
+      [ [ 'a' ] ],
+      [ [ '1' ] ],
+      [ [ '3'] ],
+      [ 3, '2' ],
+      [ 123 ],
     ],
   },
+  has: {
+    info: 'object has property?',
+    name: 'has',
+    func: nox.has,
+    args: [
+      [ { }, 'f' ],
+      [ { f: null }, 'f' ],
+      [ { f: 1 }, 'f' ],
+      [ { f: function() {} }, 'f' ],
+      [ C, 'f' ],
+      [ c, 'f' ],
+      [ o, 'f' ]
+    ]
+  },
+  isarray: {
+    info: 'object is array?',
+    name: 'is.array',
+    func: nox.is.array,
+    args: [
+      [ ],
+      [ null ],
+      [ 1 ],
+      [ 'c' ],
+      [ {} ],
+      [ { x: 1 } ],
+      [ { a: [] } ],
+      [ 1, 'c' ],
+      [ [] ],
+      [ [ null ] ],
+      [ [ 'x', 1 ] ],
+      [ [ [] ] ],
+    ]
+  }
 }
 
 /**
@@ -38,42 +90,40 @@ const cmd = {
   1: {
     info: 'functionality (basics)',
     test: [
+      'has',
       'int',
+      'isarray'
     ],
   }
 }
 
-const x = process.argv.includes('test', 2)
+const num = process.argv.includes('test', 2)
   ? Number(process.argv.at(3))
   : false
 
-if (x) {
+if (num) {
   const out = console.debug
-  const nox = require('../../lib/main')
-  const pkg = nox.package()
 
-  switch (x) {
+  switch (num) {
     case 1||2||3||4||5||6||7||8||9: {
-      out(`@ ${pkg.name}:test[${x}]`, cmd[x].info, '...')
+      out(`@ ${pkg.name}:test[${num}]`, cmd[num].info, '...')
       out()
 
-      cmd[x].test.forEach((fun) => {
+      cmd[num].test.forEach((fun) => {
         out()
         out('#', cfg[fun].info)
         out('> ---------')
         cfg[fun].args.forEach((arg) => {
-          out(`> ${pkg.name}.${fun}(${arg.s}):`, nox[fun](...arg.v))
+          out(`> ${pkg.name}.${cfg[fun].name}(`, ...arg, '):', cfg[fun].func(...arg))
         })
       })
 
       out()
-      out(`@ ${pkg.name}:test[${x}] done.`)
+      out(`@ ${pkg.name}:test[${num}] done.`)
     } break
 
     default: {
-      console.error(`@ ${pkg.name}:test[${x}] unknown!`)
+      console.error(`@ ${pkg.name}:test[${num}] unknown!`)
     } break
   }
 }
-
-/** */
