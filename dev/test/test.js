@@ -24,7 +24,7 @@ const cfg = {
   int: {
     info: 'convert to <number(integral)>',
     name: 'int',
-    func: nox.int,
+    func: nox.to.int,
     args: [
       [ '' ],
       [ '123' ],
@@ -96,6 +96,17 @@ const cmd = {
     ],
   }
 }
+
+console.log('n()', nox.is.n())
+console.log('n(null)', nox.is.n(null))
+console.log('n(1)', nox.is.n(1))
+console.log('u()', nox.is.u())
+console.log('u(null)', nox.is.u(null))
+console.log('u(1)', nox.is.u(1))
+console.log('v()', nox.is.v())
+console.log('v(null)', nox.is.v(null))
+console.log('v(1)', nox.is.v(1))
+console.log('string(1)', nox.to.string(1))
 
 const num = process.argv.includes('test', 2)
   ? Number(process.argv.at(3))

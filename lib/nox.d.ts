@@ -68,43 +68,66 @@ declare module 'nox' {
   /* ----------------------------------------------------------------------- */
 
   /**
-   * Convert `value` of any type to a **string**.
-   *
-   * @param val `value`
+   * TESTING REQUIRED!
    */
-
-  function string(val: any[]): string;
-
-  /**
-   * Convert a `value` of *any* type to an **integer**.
-   *
-   * ```
-   * nox.int('abc')      //  NaN
-   * nox.int('123abc')   //  NaN
-   * nox.int('123')      //  123
-   * nox.int('-321')     // -321
-   * nox.int('123.321')  //  123
-   * nox.int('Infinity') //  Infinity
-   * ```
-   *
-   * @param val `value`
-   */
-
-  function int(val: any): number;
-
 
   declare namespace to {
-    function string(val: any[]): string;
+
+    /**
+     * Convert a `value` of *any* type to a **string**.
+     *
+     * Accepts multiple arguments. In which case the returned string will
+     * contain each argument, separated with a space ( in passed order ).
+     *
+     * @param val `value` to convert.
+     * @param arg Additional `value(s)`.
+     */
+
+    function string(val: any, ...arg: any[]): string;
+
+    /**
+     * Convert a `value` of *any* type to an **integer**.
+     *
+     * ```js
+     * nox.int('abc')
+     * > NaN
+     * nox.int('123abc')
+     * > NaN
+     * nox.int('123')
+     * > 123
+     * nox.int('-321')
+     * > -321
+     * nox.int('123.321')
+     * > 123
+     * nox.int('Infinity')
+     * > Infinity
+     * ```
+     *
+     * @param val `value` to convert.
+     */
+
     function int(val: any | any[]): number;
+
   };
 
-  declare namespace is {
+  /**
+   * TESTING REQUIRED!
+   */
+
+  namespace is {
+
     function array(val: any): boolean;
     function boolean(val: any): boolean;
     function method(val: any): boolean;
     function number(val: any): boolean;
     function object(val: any): boolean;
     function string(val: any): boolean;
+
+    function n(val: any): boolean;
+    function u(val: any): boolean;
+    function v(val: any): boolean;
+    function x(val: any): boolean;
+
   };
 
 };
