@@ -12,7 +12,8 @@
   },
   "scripts": {
     "init": "npm install --save-dev @types/node",
-    "test": "node test.js test 1"
+    "test": "node test.js test 1",
+    "nuke": "pwsh clean.ps1"
   },
   "dependencies": {
     "nox": "file:../.."
