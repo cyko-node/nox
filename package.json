@@ -14,7 +14,9 @@
   "scripts": {
     "init": "npm install --save-dev @types/node",
     "test": "node dev/test/test.js test 1",
-    "nuke": "pwsh clean.ps1"
+    "nuke": "pwsh clean.ps1",
+    "preredo": "npm run nuke",
+    "redo": "echo ..."
   },
   "repository": {
     "type": "git",

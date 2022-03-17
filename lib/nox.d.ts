@@ -1,77 +1,42 @@
 /**
- * Cyko - **No**de e**X**tensions
- *
- * > ---
- *
- * Collection of simple and safe utilities.
- *
- * + Object property queries
- * + Object property access
- *
- * > ---
- *
- * + Data conversion
- * + Type properties
- *
- * ---
+ * **Cyko** `nox` Node eXtensions
  *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
 declare module 'nox' {
 
-  /**
-   * Get an objective representation of the **package.json** contents.
-   *
-   * ```
-   * interface example {
-   *   name: string;
-   *   version: string;
-   *   description: string;
-   *   keywords: string[ ... ];
-   *   license: string;
-   *   author: string | { name: string; email: string; };
-   *   config: { ...; };
-   *   scripts: { ...; };
-   *   dependencies: { ...; };
-   *   repository: { type: string; url: string; };
-   * };
-   * ```
-   */
+  interface nox {
 
-  function package(): object;
+    /**
+     * Get an objective representation of the **package.json** contents.
+     */
 
-  /* ----------------------------------------------------------------------- */
+    package(): object;
 
-  /**
-   * Determines whether an `object` includes a certain `property`.
-   *
-   * @param obj The `object` to search.
-   * @param key The `property` to search for.
-   */
+    // ---------------------------------------------------------------------- +
 
-  function has(obj: object, key: string | number): boolean;
+    /**
+     * Determines whether an `object` includes a certain `property`.
+     *
+     * @param obj The `object` to search.
+     * @param key The `property` to search for.
+     */
 
-  /**
-   * Get the `object` property `name`.
-   *
-   * Selects between `object[name]` and `default` based upon weather the
-   * `object` {@link has has} a property with the specified `name`.
-   *
-   * @param obj `object`
-   * @param key `name`
-   * @param def `default` = `null`
-   */
+    has(obj: object, key: string | number): boolean;
 
-  function get(obj: object, key: string, def?: any): any;
+    /**
+     * Get the `object` property `name`.
+     *
+     * Selects between `object[name]` and `default` based upon weather the
+     * `object` {@link has has} a property with the specified `name`.
+     *
+     * @param obj `object`
+     * @param key `name`
+     * @param def `default` = `null`
+     */
 
-  /* ----------------------------------------------------------------------- */
-
-  /**
-   * TESTING REQUIRED!
-   */
-
-  declare namespace to {
+    get(obj: object, key: string, def?: any): any;
 
     /**
      * Convert a `value` of *any* type to a **string**.
@@ -80,10 +45,10 @@ declare module 'nox' {
      * contain each argument, separated with a space ( in passed order ).
      *
      * @param val `value` to convert.
-     * @param arg Additional `value(s)`.
+     * @param arg `value`... ( rest ).
      */
 
-    function string(val: any, ...arg: any[]): string;
+    string(val: any, ...arg: any[]): string;
 
     /**
      * Convert a `value` of *any* type to an **integer**.
@@ -106,13 +71,49 @@ declare module 'nox' {
      * @param val `value` to convert.
      */
 
-    function int(val: any | any[]): number;
+    int(val: any | any[]): number;
+  }
 
-  };
+  /**
+   * **Cyko** `nox` Node eXtensions
+   *
+   * + Object queries
+   * + Type conversations
+   *
+   * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
+   */
+
+  declare const nox: nox;
+  export = nox;
+}
+
+
+  // ------------------------------------------------------------------------ +
 
   /**
    * TESTING REQUIRED!
    */
+/*
+  namespace to {
+
+    /**
+     * Convert a `value` of *any* type to a **string**.
+     *
+     * Accepts multiple arguments. In which case the returned string will
+     * contain each argument, separated with a space ( in passed order ).
+     *
+     * @param val `value` to convert.
+     * @param arg Additional `value(s)`.
+     *
+
+    function string(val: any, ...arg: any[]): string;
+
+
+  }
+
+  /**
+   * TESTING REQUIRED!
+   *
 
   namespace is {
 
@@ -128,6 +129,7 @@ declare module 'nox' {
     function v(val: any): boolean;
     function x(val: any): boolean;
 
-  };
+  }
 
-};
+}
+*/
