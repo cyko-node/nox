@@ -1,135 +1,159 @@
 /**
- * **Cyko** `nox` Node eXtensions
+ * **`CYKO` ⵗ {@link nox `NOX`}** - Node Xtensions
  *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
 declare module 'nox' {
 
+  //declare namespace nox {
+  interface packagePerson {
+    readonly name: string;
+    readonly email?: string;
+    readonly url?: string;
+  }
+
+
+  interface packageRepo {
+    readonly type: string;
+    readonly url: string;
+    readonly directory?: string;
+  }
+
+  /**
+   * The **package.json** data.
+   */
+
+  interface packageData {
+    readonly name: string;
+    readonly version: string;
+    readonly description?: string;
+    readonly author?: string | packagePerson;
+    readonly licence?: string;
+    readonly homepage?: string;
+    readonly repository?: string | packageRepo;
+    readonly maintainers?: (string | packagePerson)[];
+    readonly contributors?: (string | packagePerson)[];
+  }
+  //}
+
+  interface is {
+    array(): boolean;
+    boolean(): boolean;
+    callable(): boolean;
+    number(): boolean;
+    object(): boolean;
+    string(): boolean;
+    symbol(): boolean;
+  }
+
+  interface type {
+    of(x: any): type;
+    
+    is: is;
+
+    name: string;
+  }
+
+  //namespace nox { }
   interface nox {
 
+    type: type;
+
     /**
-     * Get an objective representation of the **package.json** contents.
+     * Determines whether an object contains a certain property.
+     *
+     * @param o The object.
+     * @param k The property name.
      */
 
-    package(): object;
-
-    // ---------------------------------------------------------------------- +
+    has(o: object, k: string | number | symbol): boolean;
 
     /**
-     * Determines whether an `object` includes a certain `property`.
+     * Determines whether an array contains a certain element.
      *
-     * @param obj The `object` to search.
-     * @param key The `property` to search for.
+     * @param a The array.
+     * @param i The element index.
      */
 
-    has(obj: object, key: string | number): boolean;
+    has(a: any[], i: number): boolean;
 
     /**
-     * Get the `object` property `name`.
+     * Determines whether an argument has a value (ie defined).
      *
-     * Selects between `object[name]` and `default` based upon weather the
-     * `object` {@link has has} a property with the specified `name`.
+     * ```js
+     * example(a, b) { return nox.has(b) }
+     * example(1, 2)
+     * > true  // defined as: 2.
+     * example(1)
+     * > false // undefined.
+     * example(1, null)
+     * > true  // defined as: non-value.
+     * example(1, undefined)
+     * > false // defined as: undefined.
+     * ```
      *
-     * @param obj `object`
-     * @param key `name`
-     * @param def `default` = `null`
+     * @param x The value.
      */
 
-    get(obj: object, key: string, def?: any): any;
+    has(x: any): boolean;
 
     /**
-     * Convert a `value` of *any* type to a **string**.
+     * Get the value of a object-property / array-element.
+     *
+     * Implemented as a conditional-expression...
+     *
+     * ```js
+     * nox.has(o, k) ? o[k] : d
+     * ```
+     *
+     * @param o The object.
+     * @param k The property name.
+     * @param d The default value = `null`.
+     */
+
+    get(o: object, k: string | number | symbol, d?: any): any;
+
+    /**
+     * Resolve the value of an object. The result of a function.
+     *
+     * @param x The object.
+     */
+
+    get(x: any): any;
+
+    /**
+     * Convert values of any type to a **string**.
      *
      * Accepts multiple arguments. In which case the returned string will
      * contain each argument, separated with a space ( in passed order ).
      *
-     * @param val `value` to convert.
-     * @param arg `value`... ( rest ).
+     * @param x The value.
+     * @param a The additional values.
      */
 
-    string(val: any, ...arg: any[]): string;
+    string(x: any, ...a: any[]): string;
 
-    /**
-     * Convert a `value` of *any* type to an **integer**.
-     *
-     * ```js
-     * nox.int('abc')
-     * > NaN
-     * nox.int('123abc')
-     * > NaN
-     * nox.int('123')
-     * > 123
-     * nox.int('-321')
-     * > -321
-     * nox.int('123.321')
-     * > 123
-     * nox.int('Infinity')
-     * > Infinity
-     * ```
-     *
-     * @param val `value` to convert.
-     */
-
-    int(val: any | any[]): number;
+    number(x: any, integral: bool): number;
+    int(x: any): number;
   }
 
   /**
-   * **Cyko** `nox` Node eXtensions
+   * **`CYKO` ⵗ {@link nox `NOX`}** - Node eXtensions
    *
-   * + Object queries
+   * + Object utilities
    * + Type conversations
    *
    * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
    */
 
-  declare const nox: nox;
+  var nox: nox;
   export = nox;
+
 }
-
-
-  // ------------------------------------------------------------------------ +
-
-  /**
-   * TESTING REQUIRED!
-   */
 /*
-  namespace to {
-
-    /**
-     * Convert a `value` of *any* type to a **string**.
-     *
-     * Accepts multiple arguments. In which case the returned string will
-     * contain each argument, separated with a space ( in passed order ).
-     *
-     * @param val `value` to convert.
-     * @param arg Additional `value(s)`.
-     *
-
-    function string(val: any, ...arg: any[]): string;
-
-
-  }
-
-  /**
-   * TESTING REQUIRED!
-   *
-
-  namespace is {
-
-    function array(val: any): boolean;
-    function boolean(val: any): boolean;
-    function method(val: any): boolean;
-    function number(val: any): boolean;
-    function object(val: any): boolean;
-    function string(val: any): boolean;
-
-    function n(val: any): boolean;
-    function u(val: any): boolean;
-    function v(val: any): boolean;
-    function x(val: any): boolean;
-
-  }
-
+declare module 'cyko:nox' {
+  import nox = require('nox');
+  export = nox;
 }
 */

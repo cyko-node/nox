@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "main": "lib/nox.js",
   "types": "lib/nox.d.ts",
-  "type": "commonjs",
+  "type": "module",
   "private": true,
   "license": "GPL-3.0-or-later",
   "author": {
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "init": "npm install --save-dev @types/node",
-    "test": "node dev/test/test.js test 1",
+    "test": "node --trace-warnings dev/test/test.js test 1",
     "nuke": "pwsh clean.ps1",
     "preredo": "npm run nuke",
     "redo": "echo ..."
@@ -27,5 +27,8 @@
       "name": "eggheadedmonkey",
       "email": "cyko@eggheadedmonkey.com"
     }
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^17.0.21"
+  }
 }

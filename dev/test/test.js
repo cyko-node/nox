@@ -1,27 +1,82 @@
-const nox = require('nox')
-const pkg = nox.package()
+//import { default as nox } from 'nox'
+import * as nox from 'nox'
 
-nox.get({}, 1)
-/**
- * Test: helpers...
- */
+const mod = new nox.mod('../../package.json', '../../package.json')
 
-class C {
-  v = 0
-  f() {}
-}
-
-const c = new C
-const o = {
-  v: 1,
-  f: function() {}
-}
+const pkg = nox.pkg
 
 /**
  * Test: configurations
  */
 
 const cfg = {
+  isclass: {
+    info: 'is objective/class?',
+    name: 'is.objective',
+    func: nox,
+    args: [
+      [ ],
+      [ null ],
+      [ [] ],
+      [ {} ],
+    ]
+  },
+  has: {
+    info: 'object has property?',
+    name: 'has',
+    func: nox.has,
+    args: [
+      [ [ ' +----------+ ' ] ],
+      [ [ ' | defined? | ' ] ],
+      [ [ ' +----------+ ' ] ],
+      [ ],
+      [ null ],
+      [ undefined ],
+      [ 1 ],
+      [ 'a' ],
+      [ [] ],
+      [ {} ],
+
+      [ [ ' +----------------+ ' ] ],
+      [ [ ' | array element? | ' ] ],
+      [ [ ' +----------------+ ' ] ],
+      [ [ ], 0 ],
+      [ [ ], 1 ],
+      [ [ ], -1 ],
+      [ [ 'a' ], 0 ],
+      [ [ 'a' ], 1 ],
+      [ [ 'a' ], -1 ],
+      [ [ null ], null ],
+      [ [ null ], 0 ],
+      [ [ null ], 1 ],
+      [ [ null ], -1 ],
+      [ [ undefined ], 0 ],
+      [ [ undefined ], 1 ],
+      [ [ undefined ], -1 ],
+      [ [ 'a', 'b' ], 0 ],
+      [ [ 'a', 'b' ], 1 ],
+      [ [ 'a', 'b' ], 2 ],
+      [ [ 'a', 'b' ], -1 ],
+      [ [ 'a', null, 'b' ], 0 ],
+      [ [ 'a', null, 'b' ], 1 ],
+      [ [ 'a', null, 'b' ], 2 ],
+      [ [ 'a', null, 'b' ], -1 ],
+      [ [ 'a', undefined, 'b' ], 0 ],
+      [ [ 'a', undefined, 'b' ], 1 ],
+      [ [ 'a', undefined, 'b' ], 2 ],
+      [ [ 'a', undefined, 'b' ], -1 ],
+      [ [ 'a' ], 'a' ],
+
+      [ [ ' +------------------+ ' ] ],
+      [ [ ' | object property? | ' ] ],
+      [ [ ' +------------------+ ' ] ],
+      [ { }, 'x' ],
+      [ { x: null }, 'x' ],
+      [ { x: 1 }, 'x' ],
+      [ { f: function() {} }, 'f' ],
+      [ { f() {} }, 'f' ],
+    ]
+  },
   string: {
     info: 'convert to <string>',
     name: 'string',
@@ -51,7 +106,7 @@ const cfg = {
   int: {
     info: 'convert to <number(integral)>',
     name: 'int',
-    func: nox.int,
+    func: nox.number,
     args: [
       [ ],
       [ '' ],
@@ -63,10 +118,12 @@ const cfg = {
       [ '-321.123' ],
       [ '12345678901' ],
       [ '1234567890123456789' ],
+      [ null ],
+      [ undefined ],
       [ [] ],
-      [ [ 1 ] ],
-      [ [ 1, 2 ] ],
-      [ [ 1, 2, 3 ] ],
+      [ [ 2 ] ],
+      [ [ 2, 3 ] ],
+      [ [ 'a', 2 ] ],
       [ [ 3 ] ],
       [ [ 'a' ] ],
       [ [ '1' ] ],
@@ -74,20 +131,6 @@ const cfg = {
       [ 3, '2' ],
       [ 123 ],
     ],
-  },
-  has: {
-    info: 'object has property?',
-    name: 'has',
-    func: nox.has,
-    args: [
-      [ { }, 'f' ],
-      [ { f: null }, 'f' ],
-      [ { f: 1 }, 'f' ],
-      [ { f: function() {} }, 'f' ],
-      [ C, 'f' ],
-      [ c, 'f' ],
-      [ o, 'f' ]
-    ]
   },
   isarray: {
     info: 'object is array?',
@@ -107,7 +150,7 @@ const cfg = {
       [ [ 'x', 1 ] ],
       [ [ [] ] ],
     ]
-  }
+  },
 }
 
 /**
@@ -119,23 +162,12 @@ const cmd = {
     info: 'functionality (basics)',
     test: [
       'has',
-      'int',
-      'string',
+      //'isclass',
+      //'int',
+      //'string',
     ],
   }
 }
-
-function t(a,b) {
-  if (nox.has(b)) {
-    console.log(1, a, b)
-  } else {
-    console.log(2, a, b)
-  }
-}
-
-t('x')
-t()
-t(1, 2)
 
 const num = process.argv.includes('test', 2)
   ? Number(process.argv.at(3))
