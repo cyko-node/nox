@@ -1,12 +1,20 @@
 {
   "name": "nox",
   "description": "Cyko: Node eXtensions",
-  "version": "0.0.2",
-  "main": "lib/nox.js",
-  "types": "lib/nox.d.ts",
+  "version": "0.0.3",
+  "types": "./lib/nox.d.ts",
   "type": "module",
   "private": true,
   "license": "GPL-3.0-or-later",
+  "exports": {
+    ".": "./lib/nox.js",
+    "./core/*": "./lib/core/*.js",
+    "./util/*": "./lib/util/*.js",
+    "./has": "./lib/core/has.js",
+    "./get": "./lib/core/get.js",
+    "./file": "./lib/util/file.js",
+    "./type": "./lib/util/type.js"
+  },
   "author": {
     "name": "eggheadedmonkey",
     "email": "cyko@eggheadedmonkey.com"

@@ -12,11 +12,12 @@
   "scripts": {
     "test:labs": "node --trace-warnings --experimental-specifier-resolution=node test.js test 1",
     "test:main": "node --trace-warnings test.js test 1",
+    "pretest": "npm run redo",
     "test": "npm run test:main",
 
     "nuke:win": "pwsh clean.ps1",
     "nuke:nix": "./clean.sh",
-    "nuke": "npm nuke:win",
+    "nuke": "npm run nuke:win",
 
     "preredo": "npm run nuke",
     "redo": "npm install"
