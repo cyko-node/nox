@@ -1,7 +1,6 @@
 {
   "name": "nox-test",
-  "description": "Cyko: Node eXtensions (test)",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "test.js",
   "type": "module",
   "private": true,
@@ -11,9 +10,14 @@
     "email": "cyko@eggheadedmonkey.com"
   },
   "scripts": {
-    "init": "npm install --save-dev @types/node",
-    "test": "node --trace-warnings --experimental-specifier-resolution=node test.js test 1",
-    "nuke": "pwsh clean.ps1",
+    "test:labs": "node --trace-warnings --experimental-specifier-resolution=node test.js test 1",
+    "test:main": "node --trace-warnings test.js test 1",
+    "test": "npm run test:main",
+
+    "nuke:win": "pwsh clean.ps1",
+    "nuke:nix": "./clean.sh",
+    "nuke": "npm nuke:win",
+
     "preredo": "npm run nuke",
     "redo": "npm install"
   },

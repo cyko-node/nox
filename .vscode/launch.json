@@ -5,21 +5,31 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-node",
-      "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "program": "${workspaceFolder}\\dev\\test\\test.js",
-    },
-    {
-      "name": "TEST",
+      "name": "nox:test",
+      "presentation": {
+        "hidden": false,
+        "group": "a:main",
+        "order": 1
+      },
       "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
       "cwd": "${workspaceFolder}\\dev\\test",
       "runtimeExecutable": "npm",
       "runtimeArgs": [ "run", "test" ]
+    }, {
+      "name": "nox:test (experimental)",
+      "presentation": {
+        "hidden": false,
+        "group": "b:labs",
+        "order": 1,
+      },
+      "type": "node",
+      "console": "integratedTerminal",
+      "request": "launch",
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "test:labs" ]
     }
   ]
 }
