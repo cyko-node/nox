@@ -1,3 +1,8 @@
 .git
+.gitignore
 .vscode
-**/clean.*
+jsconfig.json
+**/bak/
+**/bak[.]*
+**/clean[.]*
+**/lib/void/

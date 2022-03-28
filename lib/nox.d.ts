@@ -1,28 +1,21 @@
 /**
  * **`CYKO` ⵗ {@link nox `NOX`}** - Node Xtensions
- *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
 declare module 'nox' {
 
-  //declare namespace nox {
   interface packagePerson {
     readonly name: string;
     readonly email?: string;
     readonly url?: string;
   }
 
-
   interface packageRepo {
     readonly type: string;
     readonly url: string;
     readonly directory?: string;
   }
-
-  /**
-   * The **package.json** data.
-   */
 
   interface packageData {
     readonly name: string;
@@ -35,30 +28,80 @@ declare module 'nox' {
     readonly maintainers?: (string | packagePerson)[];
     readonly contributors?: (string | packagePerson)[];
   }
-  //}
 
-  interface is {
-    array(): boolean;
-    boolean(): boolean;
-    callable(): boolean;
-    number(): boolean;
-    object(): boolean;
-    string(): boolean;
-    symbol(): boolean;
+  interface type<T> {
+    of(x: T): type<T>;
+
+    is: {
+      array(): boolean;
+      boolean(): boolean;
+      callable(): boolean;
+      number(): boolean;
+      object(): boolean;
+      string(): boolean;
+      symbol(): boolean;
+    };
+
+    get name(): string;
   }
 
-  interface type {
-    of(x: any): type;
-    
-    is: is;
+  /*
+  enum fileEncodings {
+    ascii     = 'ascii',
+    base64    = 'base64',
+    base64url = 'base64url',
+    binary    = 'binary',
+    hex       = 'hex',
+    latin1    = 'latin1',
+    latin     = 'latin1',
+    ucs2      = 'ucs2',
+    utf8      = 'utf8', 
+    utf16le   = 'utf16le',
+    default   = 'utf8'
+  }
 
-    name: string;
+  type fileEncoding = {
+    [key in fileEncodings]: string;
+  }
+  */
+  type fileEncoding = {
+    readonly ascii: string;
+    readonly base64: string;
+    readonly base64url: string;
+    readonly binary: string;
+    readonly hex: string;
+    readonly latin1: string;
+    readonly latin: string;
+    readonly ucs2: string;
+    readonly utf8: string;
+    readonly utf16le: string;
+    readonly default: string;
+  }
+
+  interface file {
+
+    /**
+     * encodings.
+     */
+
+    readonly encoding: fileEncoding;
+
+    /**
+     * Constructs a `file` object.
+     */
+
+    read(path: string, encoding?: fileEncoding): file;
+
+    get data(): string;
+    get path(): string;
+    get name(): string;
   }
 
   //namespace nox { }
   interface nox {
 
-    type: type;
+    type: type<any>;
+    file: file;
 
     /**
      * Determines whether an object contains a certain property.
@@ -122,28 +165,10 @@ declare module 'nox' {
 
     get(x: any): any;
 
-    /**
-     * Convert values of any type to a **string**.
-     *
-     * Accepts multiple arguments. In which case the returned string will
-     * contain each argument, separated with a space ( in passed order ).
-     *
-     * @param x The value.
-     * @param a The additional values.
-     */
-
-    string(x: any, ...a: any[]): string;
-
-    number(x: any, integral: bool): number;
-    int(x: any): number;
   }
 
   /**
    * **`CYKO` ⵗ {@link nox `NOX`}** - Node eXtensions
-   *
-   * + Object utilities
-   * + Type conversations
-   *
    * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
    */
 
@@ -152,8 +177,8 @@ declare module 'nox' {
 
 }
 /*
-declare module 'cyko:nox' {
-  import nox = require('nox');
+declare module 'node:nox' {
+  import nox = require('nox')
   export = nox;
 }
 */

@@ -1,0 +1,12 @@
+{
+  "node": {
+    "cmdline": [
+      {
+        "flag": "--trace-warnings"
+      }, {
+        "flag": "--experimental-specifier-resolution=node",
+        "info": "(ECMA) enable dir imports"
+      }
+    ]
+  }
+}

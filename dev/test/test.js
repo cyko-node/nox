@@ -1,9 +1,13 @@
 //import { default as nox } from 'nox'
+//import nox from 'cyko:nox'
 import * as nox from 'nox'
 
-const mod = new nox.mod('../../package.json', '../../package.json')
-
 const pkg = nox.pkg
+
+console.log(nox.file.encoding.latin1)
+console.log(nox.file.encodings.ascii)
+console.log(nox.file.encoding.valueOf())
+console.log(nox.file.encoding.valueOf())
 
 /**
  * Test: configurations
