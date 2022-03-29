@@ -4,9 +4,10 @@ import * as nox from 'nox'
 
 const pkg = nox.pkg
 
+nox.type.of(1)
 console.log(nox.file.encoding.latin1)
-console.log(nox.file.encodings.ascii)
-console.log(nox.file.encoding.valueOf())
+console.log(nox.file.encoding.hex)
+console.log(nox.file.encoding.utf8)
 console.log(nox.file.encoding.valueOf())
 
 /**

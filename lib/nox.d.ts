@@ -4,34 +4,34 @@
  */
 
 declare module 'nox' {
+  
+  interface pkgPerson {
+    readonly [index: string]: string;
 
-  interface packagePerson {
     readonly name: string;
     readonly email?: string;
     readonly url?: string;
   }
 
-  interface packageRepo {
+  interface pkgRepo {
     readonly type: string;
     readonly url: string;
     readonly directory?: string;
   }
 
-  interface packageData {
+  interface pkg {
     readonly name: string;
     readonly version: string;
     readonly description?: string;
-    readonly author?: string | packagePerson;
+    readonly author?: string | pkgPerson;
     readonly licence?: string;
     readonly homepage?: string;
-    readonly repository?: string | packageRepo;
-    readonly maintainers?: (string | packagePerson)[];
-    readonly contributors?: (string | packagePerson)[];
+    readonly repository?: string | pkgRepo;
+    readonly maintainers?: (string | pkgPerson)[];
+    readonly contributors?: (string | pkgPerson)[];
   }
 
-  interface type<T> {
-    of(x: T): type<T>;
-
+  interface Type<T> {
     is: {
       array(): boolean;
       boolean(): boolean;
@@ -45,63 +45,55 @@ declare module 'nox' {
     get name(): string;
   }
 
-  /*
-  enum fileEncodings {
-    ascii     = 'ascii',
-    base64    = 'base64',
-    base64url = 'base64url',
-    binary    = 'binary',
-    hex       = 'hex',
-    latin1    = 'latin1',
-    latin     = 'latin1',
-    ucs2      = 'ucs2',
-    utf8      = 'utf8', 
-    utf16le   = 'utf16le',
-    default   = 'utf8'
+  namespace io {
+    type encoding = {
+      default: string;
+      ascii: string;
+      base64: string;
+      base64url: string;
+      binary: string;
+      hex: string;
+      latin1: string;
+      ucs2: string;
+      utf8: string;
+      utf16le: string;
+    }
+
+    interface File {
+      get content(): string;
+      
+      get path(): string;
+      get name(): string;
+    }
   }
 
-  type fileEncoding = {
-    [key in fileEncodings]: string;
-  }
-  */
-  type fileEncoding = {
-    readonly ascii: string;
-    readonly base64: string;
-    readonly base64url: string;
-    readonly binary: string;
-    readonly hex: string;
-    readonly latin1: string;
-    readonly latin: string;
-    readonly ucs2: string;
-    readonly utf8: string;
-    readonly utf16le: string;
-    readonly default: string;
-  }
+  // ----------------------------------------------------------------------- +
+  // MODULE
+  // ----------------------------------------------------------------------- +
 
-  interface file {
-
-    /**
-     * encodings.
-     */
-
-    readonly encoding: fileEncoding;
-
-    /**
-     * Constructs a `file` object.
-     */
-
-    read(path: string, encoding?: fileEncoding): file;
-
-    get data(): string;
-    get path(): string;
-    get name(): string;
-  }
-
-  //namespace nox { }
   interface nox {
+    package: pkg;
+    pkg: pkg;
 
-    type: type<any>;
-    file: file;
+    type: {
+
+      /**
+       * {@link Type **`type`**} `constructor`
+       */
+
+      of<T>(x: T): Type<T>;
+    }
+
+    io: {
+
+      encoding: io.encoding;
+
+      /**
+       * {@link io.File **`File`**} `constructor`
+       */
+
+      read(path: string, encoding?: io.encoding): File;
+    }
 
     /**
      * Determines whether an object contains a certain property.
@@ -176,9 +168,8 @@ declare module 'nox' {
   export = nox;
 
 }
-/*
+
 declare module 'node:nox' {
   import nox = require('nox')
   export = nox;
 }
-*/

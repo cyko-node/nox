@@ -3,6 +3,8 @@
 .vscode
 jsconfig.json
 **/bak/
-**/bak[.]*
-**/clean[.]*
+**/bak.*
+**/*.ps1
+**/*.sh
+**/*.bash
 **/lib/void/
