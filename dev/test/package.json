@@ -6,23 +6,25 @@
   "private": true,
   "license": "GPL-3.0-or-later",
   "author": {
-     "name": "eggheadedmonkey",
+    "name": "eggheadedmonkey",
     "email": "cyko@eggheadedmonkey.com",
-      "url": "https://eggheadedmonkey.com"
+    "url": "https://eggheadedmonkey.com"
   },
   "scripts": {
+    "nuke:windows": "pwsh nuke.ps1",
+    "nuke:unix": "./nuke.sh",
     "test:labs": "node --trace-warnings --experimental-specifier-resolution=node test.js test 1",
     "test:main": "node --trace-warnings test.js test 1",
-
-    "pretest":   "npm run redo",
-    "test":      "npm run test:main",
-
-    "nuke:win":  "pwsh clean.ps1",
-    "nuke:nix":  "./clean.sh",
-    "nuke":      "npm run nuke:win",
-
-    "preredo":   "npm run nuke",
-    "redo":      "npm install"
+    "prenuke:init": "npm run nuke",
+    "pretest:redo": "npm run nuke:init",
+    "premain:redo": "npm run nuke:init",
+    "init": "npm install",
+    "nuke": "npm run nuke:windows",
+    "nuke:init": "npm run init",
+    "test": "npm run test:main",
+    "test:redo": "npm run test:main",
+    "main": "npm run test",
+    "main:redo": "npm run main"
   },
   "dependencies": {
     "nox": "file:../.."

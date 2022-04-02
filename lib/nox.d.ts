@@ -1,175 +1,103 @@
 /**
- * **`CYKO` ⵗ {@link nox `NOX`}** - Node Xtensions
+ * **`CYKO` {@link nox `NOX`}** - **Node Xtensions**
+ *
+ * > ---
+ *
+ * ```
+ * import * as nox from 'nox'
+ * // -----------------------
+ * const nox = require('nox')
+ * ```
+ *
+ * > ---
+ *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
-declare module 'nox' {
-  
-  interface pkgPerson {
-    readonly [index: string]: string;
+export as namespace nox;
 
-    readonly name: string;
-    readonly email?: string;
-    readonly url?: string;
-  }
+// ------------------------------------------------------------------------- *
 
-  interface pkgRepo {
-    readonly type: string;
-    readonly url: string;
-    readonly directory?: string;
-  }
+declare type Packman = {
+  get name(): string;
+  get mail(): string;
+}
 
-  interface pkg {
-    readonly name: string;
-    readonly version: string;
-    readonly description?: string;
-    readonly author?: string | pkgPerson;
-    readonly licence?: string;
-    readonly homepage?: string;
-    readonly repository?: string | pkgRepo;
-    readonly maintainers?: (string | pkgPerson)[];
-    readonly contributors?: (string | pkgPerson)[];
-  }
+declare type VersionNumber = {
+  string(): string;
+  number(): number;
+}
 
-  interface Type<T> {
-    is: {
-      array(): boolean;
-      boolean(): boolean;
-      callable(): boolean;
-      number(): boolean;
-      object(): boolean;
-      string(): boolean;
-      symbol(): boolean;
-    };
+declare type Version = {
+  get major(): VersionNumber;
+  get minor(): VersionNumber;
+  get patch(): VersionNumber;
 
-    get name(): string;
-  }
+  string(): string;
 
-  namespace io {
-    type encoding = {
-      default: string;
-      ascii: string;
-      base64: string;
-      base64url: string;
-      binary: string;
-      hex: string;
-      latin1: string;
-      ucs2: string;
-      utf8: string;
-      utf16le: string;
-    }
+  get name(): string;
+}
 
-    interface File {
-      get content(): string;
-      
-      get path(): string;
-      get name(): string;
-    }
-  }
+declare type Package = {
+  get name(): string;
+  get description(): string;
+  get version(): Version;
+  get author(): Packman;
+  get license(): string;
+}
 
-  // ----------------------------------------------------------------------- +
-  // MODULE
-  // ----------------------------------------------------------------------- +
+export interface Packagez {
+  constructor(): Packagez;
+}
 
-  interface nox {
-    package: pkg;
-    pkg: pkg;
+export const pkg: Package;
+export const version: Version;
 
-    type: {
+// ------------------------------------------------------------------------- *
 
-      /**
-       * {@link Type **`type`**} `constructor`
-       */
+declare interface TypeTests {
+  array(): boolean;
+  boolean(): boolean;
+  function(): boolean;
+  number(): boolean;
+  object(): boolean;
+  string(): boolean;
+  symbol(): boolean;
+}
 
-      of<T>(x: T): Type<T>;
-    }
+declare enum TypeNames {
+  array = 'array',
+  boolean = 'boolean',
+  function = 'function',
+  number = 'number',
+  object = 'object',
+  string = 'string',
+  symbol = 'symbol'
+}
 
-    io: {
-
-      encoding: io.encoding;
-
-      /**
-       * {@link io.File **`File`**} `constructor`
-       */
-
-      read(path: string, encoding?: io.encoding): File;
-    }
-
-    /**
-     * Determines whether an object contains a certain property.
-     *
-     * @param o The object.
-     * @param k The property name.
-     */
-
-    has(o: object, k: string | number | symbol): boolean;
-
-    /**
-     * Determines whether an array contains a certain element.
-     *
-     * @param a The array.
-     * @param i The element index.
-     */
-
-    has(a: any[], i: number): boolean;
-
-    /**
-     * Determines whether an argument has a value (ie defined).
-     *
-     * ```js
-     * example(a, b) { return nox.has(b) }
-     * example(1, 2)
-     * > true  // defined as: 2.
-     * example(1)
-     * > false // undefined.
-     * example(1, null)
-     * > true  // defined as: non-value.
-     * example(1, undefined)
-     * > false // defined as: undefined.
-     * ```
-     *
-     * @param x The value.
-     */
-
-    has(x: any): boolean;
-
-    /**
-     * Get the value of a object-property / array-element.
-     *
-     * Implemented as a conditional-expression...
-     *
-     * ```js
-     * nox.has(o, k) ? o[k] : d
-     * ```
-     *
-     * @param o The object.
-     * @param k The property name.
-     * @param d The default value = `null`.
-     */
-
-    get(o: object, k: string | number | symbol, d?: any): any;
-
-    /**
-     * Resolve the value of an object. The result of a function.
-     *
-     * @param x The object.
-     */
-
-    get(x: any): any;
-
-  }
-
-  /**
-   * **`CYKO` ⵗ {@link nox `NOX`}** - Node eXtensions
-   * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
-   */
-
-  var nox: nox;
-  export = nox;
+declare interface Type {
+  get name(): TypeNames | 'undefined';
+  is: TypeTests;
 
 }
 
-declare module 'node:nox' {
-  import nox = require('nox')
-  export = nox;
-}
+
+// ------------------------------------------------------------------------- *
+
+/**
+ * **`CYKO` {@link nox `NOX`}** - **Node Xtensions**
+ *
+ * > ---
+ *
+ * ```
+ * import * as nox from 'nox'
+ * // -----------------------
+ * const nox = require('nox')
+ * ```
+ *
+ * > ---
+ *
+ * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
+ */
+
+declare module "nox";

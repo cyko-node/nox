@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true
+  },
+
+  "include": [ "./lib"  ],
+  "exclude": [ "./lib/void" ],
+}

@@ -5,10 +5,203 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "run@nox/* main",
+      "presentation": {
+        "hidden": false,
+        "group": "a",
+        "order": 1
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-script", "main" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/* test",
+      "presentation": {
+        "hidden": false,
+        "group": "a",
+        "order": 2
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-script", "test" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/* main:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "a",
+        "order": 3
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-script", "main:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/* test:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "a",
+        "order": 4
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-script", "test:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/* nuke:init",
+      "presentation": {
+        "hidden": false,
+        "group": "a",
+        "order": 5
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-script", "nuke:init" ],
+      "cwd": "${workspaceFolder}"
+    },
+
+
+
+    {
+      "name": "run@nox/test main",
+      "presentation": {
+        "hidden": false,
+        "group": "b",
+        "order": 1
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-test", "-script", "main" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/test test",
+      "presentation": {
+        "hidden": false,
+        "group": "b",
+        "order": 2
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-test", "-script", "test" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/test main:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "b",
+        "order": 3
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-test", "-script", "main:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/test test:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "b",
+        "order": 4
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-test", "-script", "test:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/test nuke:init",
+      "presentation": {
+        "hidden": false,
+        "group": "b",
+        "order": 5
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-test", "-script", "nuke:init" ],
+      "cwd": "${workspaceFolder}"
+    },
+
+
+
+    {
+      "name": "run@nox/self main",
+      "presentation": {
+        "hidden": false,
+        "group": "c",
+        "order": 1
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-self", "-script", "main" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/self test",
+      "presentation": {
+        "hidden": false,
+        "group": "c",
+        "order": 2
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-self", "-script", "test" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/self main:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "c",
+        "order": 3
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-self", "-script", "main:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/self test:redo",
+      "presentation": {
+        "hidden": false,
+        "group": "c",
+        "order": 4
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-self", "-script", "test:redo" ],
+      "cwd": "${workspaceFolder}"
+    }, {
+      "name": "run@nox/self nuke:init",
+      "presentation": {
+        "hidden": false,
+        "group": "c",
+        "order": 5
+      },
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}\\run.ps1",
+      "args": [ "-self", "-script", "nuke:init" ],
+      "cwd": "${workspaceFolder}"
+    },
+
+
+
+
+    {
       "name": "nox:test",
       "presentation": {
         "hidden": false,
-        "group": "a:main",
+        "group": "x:a:main",
         "order": 1
       },
       "type": "node",
@@ -21,7 +214,7 @@
       "name": "nox:test (experimental)",
       "presentation": {
         "hidden": false,
-        "group": "b:labs",
+        "group": "x:b:labs",
         "order": 1,
       },
       "type": "node",

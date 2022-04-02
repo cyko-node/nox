@@ -4,6 +4,6 @@ $script:nuke = (
 )
 
 $script:nuke.foreach({
-  Write-Output "rm $_"
+  Write-Host "rm $_"
   Remove-Item -Force -Recurse -ErrorAction SilentlyContinue $_
 })
