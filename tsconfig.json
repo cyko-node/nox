@@ -1,9 +1,35 @@
 {
+  /*
+   * Typesafety for JavaScript!
+   */
+
   "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "NodeNext", // depends on workspace ts setup .vsconfig
+    "resolveJsonModule": true,      // requires moduleResolution: "nodeish"
+
+    /*
+     * Setup strict typechecking, without compiling.
+     */
+
+    "allowJs": true, // use .js files (aswell as .ts)
+    "checkJs": true, // enable typecheck on .js files
+    "noEmit":  true, // don't compile anything (just perform typechecks).
+    "strict":  true, // enable strict typechecking.
+    "strictNullChecks": true,  // enable null and undefined typechecking.
+    "noImplicitAny":    false, // enable the any type as falback.
+
+    /*
+     * Files / Paths.
+     */
+
+    "outDir": "./lib" // where the code resides.
   },
+
+  /*
+   * File filtering.
+   */
 
   "include": [ "./lib"  ],
   "exclude": [ "./lib/void" ],

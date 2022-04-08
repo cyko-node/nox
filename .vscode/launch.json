@@ -75,11 +75,12 @@
         "group": "b",
         "order": 1
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-test", "-script", "main" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "main" ]
     }, {
       "name": "run@nox/test test",
       "presentation": {
@@ -87,11 +88,12 @@
         "group": "b",
         "order": 2
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-test", "-script", "test" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "test" ]
     }, {
       "name": "run@nox/test main:redo",
       "presentation": {
@@ -99,11 +101,12 @@
         "group": "b",
         "order": 3
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-test", "-script", "main:redo" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "main:redo" ]
     }, {
       "name": "run@nox/test test:redo",
       "presentation": {
@@ -111,11 +114,12 @@
         "group": "b",
         "order": 4
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-test", "-script", "test:redo" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "test:redo" ]
     }, {
       "name": "run@nox/test nuke:init",
       "presentation": {
@@ -123,11 +127,12 @@
         "group": "b",
         "order": 5
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-test", "-script", "nuke:init" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}\\dev\\test",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "nuke:init" ]
     },
 
 
@@ -139,11 +144,12 @@
         "group": "c",
         "order": 1
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-self", "-script", "main" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "main" ]
     }, {
       "name": "run@nox/self test",
       "presentation": {
@@ -151,11 +157,12 @@
         "group": "c",
         "order": 2
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-self", "-script", "test" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "test" ]
     }, {
       "name": "run@nox/self main:redo",
       "presentation": {
@@ -163,11 +170,12 @@
         "group": "c",
         "order": 3
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-self", "-script", "main:redo" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "main:redo" ]
     }, {
       "name": "run@nox/self test:redo",
       "presentation": {
@@ -175,54 +183,25 @@
         "group": "c",
         "order": 4
       },
-      "type": "PowerShell",
+      "type": "node",
+      "console": "integratedTerminal",
       "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-self", "-script", "test:redo" ],
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [ "run", "test:redo" ]
     }, {
       "name": "run@nox/self nuke:init",
       "presentation": {
         "hidden": false,
         "group": "c",
-        "order": 5
-      },
-      "type": "PowerShell",
-      "request": "launch",
-      "script": "${workspaceFolder}\\run.ps1",
-      "args": [ "-self", "-script", "nuke:init" ],
-      "cwd": "${workspaceFolder}"
-    },
-
-
-
-
-    {
-      "name": "nox:test",
-      "presentation": {
-        "hidden": false,
-        "group": "x:a:main",
-        "order": 1
+        "order": 5  
       },
       "type": "node",
       "console": "integratedTerminal",
       "request": "launch",
-      "cwd": "${workspaceFolder}\\dev\\test",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [ "run", "test" ]
-    }, {
-      "name": "nox:test (experimental)",
-      "presentation": {
-        "hidden": false,
-        "group": "x:b:labs",
-        "order": 1,
-      },
-      "type": "node",
-      "console": "integratedTerminal",
-      "request": "launch",
-      "cwd": "${workspaceFolder}\\dev\\test",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [ "run", "test:labs" ]
+      "runtimeArgs": [ "run", "nuke:init" ]
     }
   ]
 }

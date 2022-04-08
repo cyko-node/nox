@@ -10,6 +10,9 @@
     "email": "cyko@eggheadedmonkey.com",
     "url": "https://eggheadedmonkey.com"
   },
+  "config": {
+    "eggheadedmonkey": "1337"
+  },
   "scripts": {
     "nuke:windows": "pwsh nuke.ps1",
     "nuke:unix": "./nuke.sh",
