@@ -31,6 +31,6 @@
    * File filtering.
    */
 
-  "include": [ "./lib"  ],
+  "include": [ "./lib" ],
   "exclude": [ "./lib/void" ],
 }

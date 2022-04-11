@@ -35,35 +35,18 @@ declare module "nox";
 export as namespace nox;
 
 // ------------------------------------------------------------------------- *
-// PACKAGE
-// ------------------------------------------------------------------------- *
 
-/** ------------------------------------------------------------------------ *
- * @interface Package package.json
- *//***/
+export namespace Module {
 
-declare namespace meta {
-
-  type PackmanRole = 'author' | 'maintainer' | 'contributor'
+  namespace Person {
+    type role = 'author' | 'maintainer' | 'contributor';
+  }
 
   /**
-   * `package.json` interface
-   *
-   * ---
-   *
-   * Represents a person mentioned in the following contexts...
-   *
-   * + `author`
-   * + `maintainers`
-   * + `contributors`
-   *
-   * The context defines the  {@link PackageRole **role**} of a person.
-   *
-   * The `author` role is unique / singular, ie assigned to one person alone.  
-   * The `author` role is always present.
+   * Represents a person mentioned in the package configuration.
    */
 
-  interface Packman {
+  interface Person {
 
     /**
      * Provides access to the complete data, unaltered / as defined.
@@ -76,54 +59,35 @@ declare namespace meta {
 
     /**
      * Represents the context in which the person is mentioned.
+     *
+     * + `author`
+     * + `maintainer`
+     * + `contributor`
+     *
+     * There is always one single `author` ( unique ).
      */
 
-    readonly role: PackmanRole;
+    readonly role: Person.role;
   }
 
   /**
-   * `package.json` interface
+   * Represents one of the three number-combinations in a version string.
    *
-   * ---
-   *
-   * Represents one of the three numbers in a version string.  
-   * Where `major` refers to the first number, `minor` the second, and `patch`
-   * the third.
+   * + `major`
+   * + `minor`
+   * + `patch`
    */
 
   interface Vumber {
-
-    /**
-     * Returns the number as a **string**.
-     */
-
     string(): string;
-
-    /**
-     * Returns the number as ( you guessed it ) a **number**.
-     */
-
     number(): number;
   }
 
   /**
-   * `package.json` interface
-   *
-   * ---
-   *
    * Represents a version, numbers and codename.
-   *
-   * @example
-   * const v = new Version('1.23.0123', 'cyko')
-   * v.major.number() >  1
-   * v.minor.number() >  23
-   * v.patch.number() >  123
-   * v.patch.string()> '0123'
-   * v.name > 'cyko'
    */
 
-  type Version  = {
-
+  interface Version {
     /**
      * The `major` number.
      */
@@ -144,8 +108,10 @@ declare namespace meta {
 
     /**
      * Returns the complete version string.
-     * @example
-     * version.string() > '1.2.3'
+     *
+     * ```js
+     * version.string() > '1.2.03'
+     * ```
      */
 
     string(): string;
@@ -158,36 +124,29 @@ declare namespace meta {
   }
 
   /**
-   * `package.json` interface ( main implementation )
+   * Represents the contents of: `package.json`
    *
-   * ---
-   *
-   * The following members are named as the property they refer to.
-   *
-   * + {@link Package.name `name`}
-   * + {@link Package.name `description`}
-   * + {@link Package.name `version`}
-   * + {@link Package.name `author`}
-   * + {@link Package.name `license`}
-   * + {@link Package.name `maintainers`}
-   * + {@link Package.name `contributors`}
-   *
-   * The following members don't have a property counterpart.
-   *
+   * In general, members are named as the property they refer to.
+   * In special cases, members have no equally named property:
+   * + {@link Package.name `content`}
+   *   - *provides access to the complete data, unaltered / as defined.*
    * + {@link Package.name `people`}
-   * + {@link Package.name `data`}
+   *   - *provides access to all people, as an array.*
    *
-   * The special {@link Package.data data} member provides access to the entire
-   * file, as a properly structured object.
+   * @since 0.1.0
    */
 
   interface Package {
 
     /**
-     * Constructs a {@link Package} from an `package.json` object.
+     * Constructs a {@link Package} using a `package.json` object.
      *
      * *Makes a deep-copy of the provided object.*
      *
+     * ---
+     *
+     * There's several ways to obtain the required data and construct a
+     * {@link Package}. A few examples...
      * @example <caption>`Node` `ESModule` **EXPERIMENTAL!**</caption>
      * import { default as o } from './package.json' assert { type: 'json' }
      * var p = new Package(o)
@@ -201,74 +160,108 @@ declare namespace meta {
      * var o = readFileSync('./package.json')
      * var p = new Package(JSON.parse(o))
      *
-     * @param o The `package.json` contents (as a structured object).
+     * @param o The `package.json` contents ( as a structured object ).
      */
 
     constructor(o: object): Package;
 
-    get data(): object;
+    /**
+     * Provides access to the complete data, unaltered / as defined.
+     */
 
-    get name(): string;
-    get description(): string;
-    get version(): Version;
-    get author(): Packman;
-    get license(): string;
+    readonly content: object;
 
-    get people(): Packman[];
-    get maintainers(): Packman[];
-    get contributors(): Packman[];
+    /**
+     * The name property.
+     */
+
+    readonly name: string;
+
+    /**
+     * The description property.
+     */
+
+    readonly description: string;
+
+    /**
+     * The version property as a {@link Version} object.
+     * @example
+     * version.major.number() >  1
+     * version.minor.number() >  23
+     * version.patch.number() >  123
+     * version.patch.string() > '0123'
+     * @example
+     * version.name > 'codename'
+     */
+
+    readonly version: Version;
+
+    /**
+     * The author property as a {@link Person} object.
+     */
+
+    readonly author: Person;
+
+    /**
+     * The license property.
+     */
+
+    readonly license: string;
+
+    /**
+     * The people as a {@link Person} array. Includes...
+     * + `author`
+     * + `maintainers`
+     * + `contributors`
+     */
+
+    readonly people: Person[];
+
+    /**
+     * The maintainers property as a {@link Person} array.
+     */
+
+    readonly maintainers: Person[];
+
+    /**
+     * The contributors property as a {@link Person} array.
+     */
+
+    readonly contributors: Person[];
   }
 
-  /**
-   * Module metadata : `package.json`
-   */
 
-  export const pkg: Package;
+  const initialized: boolean;
 
-  /**
-   * Module metadata : `pkg.version` alias.
-   */
+  const data: Package;
+  const path: string;
+  const name: string;
+  const version: Version;
+  const description: string;
+  const author: Person;
+  const people: Person[];
+  const maintainers: Person[];
+  const contributors: Person[];
 
-  export const version: Version;
+  // ----------------------------------------------------------------------- *
 
-  type InitializerAttributes = {
-    env?: object | 'default';
-    file?: string;
-    object?: object;
+
+  // ------------------------------------------
+  namespace init {
+    namespace source {
+      type env = string; //object | 'default';
+      type file = string;
+      type struct = object;
+    }
+
+    type attributes = {
+      env?: source.env;
+      file?: source.file;
+      object?: source.struct;
+    };
   }
 
-  function initialize(attributes: InitializerAttributes): Package;
+  function initialize(attributes?: init.attributes): Package;
+ 
+  // ----------------------------------------------------------------------- *
 }
-// ------------------------------------------------------------------------ *
-
-export namespace init {
-  enum mode {
-    environment,
-    file,
-    object,
-    property,
-
-    default,
-  }
-
-  type item = {
-    mode: mode;
-    data: object;
-  };
-
-  type attributes = {
-    pkg:  item;
-    cfg?: item;
-  };
-
-  function load(attr: attributes): meta.Package;
-}
-
-
-// ------------------------------------------------------------------------ *
-
-
-// ------------------------------------------------------------------------- *
-
-
-// ------------------------------------------------------------------------- *
