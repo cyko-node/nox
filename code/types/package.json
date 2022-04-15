@@ -1,0 +1,10 @@
+{
+    "name": "@types/nox",
+    "version": "0.0.1",
+    "description": "TypeScript definitions for Cyko:NoX",
+    "license": "MIT",
+    "main": "",
+    "types": "index.d.ts",
+    "scripts": {},
+    "dependencies": {}
+}

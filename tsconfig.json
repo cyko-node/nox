@@ -24,13 +24,21 @@
      * Files / Paths.
      */
 
-    "outDir": "./lib" // where the code resides.
+    "outDir": "./code/lib", // where the code resides.
+
+    // test
+    //"types": [ "./lib/nox.d.ts"],
+    //"rootDir": "./lib",
+    //"paths": { "*":[ "./types/nox/*" ] },
+    "typeRoots": [ "./code/types/", "./node_modules/@types/" ],
+
+    //"paths": { "*": [ "./node_modules/*", "./lib/types/*" ]}
   },
 
   /*
    * File filtering.
    */
 
-  "include": [ "./lib" ],
-  "exclude": [ "./lib/void" ],
+  "include": [ "./code/lib", "./code/types" ],
+  "exclude": [ "./code/bak" ],
 }

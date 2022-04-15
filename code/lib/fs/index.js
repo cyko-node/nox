@@ -1,12 +1,10 @@
 /** ------------------------------------------------------------------------ *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/base
- * @file constants.js
+ * @path cyko:nox/fs
+ * @file index.js
  ** ---------------------------------------------------------- */ 'use strict'
 
-const sull = ''
+export * from './path/index.js'
 
 // ------------------------------------------------------------------------ *
-
-export { sull }

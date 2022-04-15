@@ -1,16 +1,17 @@
-import { Module } from 'nox'
+import { Module, initialize } from 'nox/module'
+
+console.log(platform.cross)
 
 function log(...arg) { console.log(...arg) }
 function lol() { console.log('----------') }
 
-const p = Module.data
-const v = nox.meta.version
-const x = nox.meta.initialize({ env: 'default' }) //({ env: 'npm_package_json' }) //({ type: nox.initializer.environment })
-const y = nox.meta.initialize({ file: './package.json'})
-const z = nox.meta.initialize({ object: file })
+const p = Module.object
+const v = Module.version
+const x = initialize({ env: 'default' }) //({ env: 'npm_package_json' }) //({ type: nox.initializer.environment })
+const y = initialize({ file: './package.json'})
+const z = initialize({ object: {} })
 
-
-log('package[p]:', p.data)
+log('package[p]:', p.content)
 log('package[x]:', x.data)
 log('package[y]:', y.data)
 log('package[z]:', z.data)

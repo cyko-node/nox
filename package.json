@@ -4,11 +4,13 @@
   "codename": "estrella",
   "version": "0.0.1",
   "main": "./lib/nox.js",
-  "types": "./lib/nox.d.ts",
+  "typefs": "./lib/nox.d.ts",
   "type": "module",
   "exports": {
     ".": "./lib/nox.js",
-    "./constants": "./lib/base/constants.js",
+    "./globals": "./lib/globals.js",
+    "./base": "./lib/base/index.js",
+    "./fs": "./lib/fs/index.js",
     "./module": "./lib/module/index.js"
   },
   "private": true,

@@ -1,7 +1,7 @@
 /** ------------------------------------------------------------------------ *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/util
+ * @path cyko:nox/base
  * @file atom.js
  ** ---------------------------------------------------------- */ 'use strict'
 
@@ -10,13 +10,9 @@
  */
 
 class Atom {
-  /** ------
-   * @type {T}
-   */
+  /** @type {T} */ #core
 
-  #core
-
-  constructor(/** @type {T} */x) {
+  constructor(x) {
     if (x instanceof Atom) {
       this.#core = x.#core
     } else {
@@ -24,12 +20,8 @@ class Atom {
     }
   }
 
-  /**
-   * @returns {T}
-   */
-
-  get data() { return this.#core }
-  set data(/** @type {*} */x) { this.#core = new Atom(x).#core }
+  get data( ) { return this.#core }
+  set data(x) { this.#core = new Atom(x).#core }
 }
 
 // ------------------------------------------------------------------------ *

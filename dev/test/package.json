@@ -14,20 +14,25 @@
     "eggheadedmonkey": "1337"
   },
   "scripts": {
+    "init:cross": "npm install",
+    "init:windows": "npm run init:cross",
+    "init:posix": "npm run init:cross",
     "nuke:windows": "pwsh nuke.ps1",
-    "nuke:unix": "./nuke.sh",
+    "nuke:posix": "./nuke.sh",
     "test:labs": "node --trace-warnings --experimental-specifier-resolution=node test.js test 1",
     "test:main": "node --trace-warnings test.js test 1",
     "prenuke:init": "npm run nuke",
     "pretest:redo": "npm run nuke:init",
     "premain:redo": "npm run nuke:init",
-    "init": "npm install",
+    "init": "npm run init:windows",
     "nuke": "npm run nuke:windows",
     "nuke:init": "npm run init",
     "test": "npm run test:main",
     "test:redo": "npm run test:main",
     "main": "npm run test",
-    "main:redo": "npm run main"
+    "main:redo": "npm run main",
+    "postinit:windows": "pwsh init.ps1",
+    "postinit:posix": "./init.sh"
   },
   "dependencies": {
     "nox": "file:../.."

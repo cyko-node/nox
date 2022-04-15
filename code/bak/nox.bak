@@ -1,0 +1,111 @@
+/**
+ * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
+ */
+
+declare module 'nox';
+
+/* *
+ * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
+ */
+
+//export as namespace nox;
+
+// ------------------------------------------------------------------------- *
+
+declare global {
+  enum platform {
+    cross,
+    posix,
+    win32
+  }
+}
+
+
+export interface Atom<T> {
+  constructor(x?: T): Atom<T>;
+
+  get data(): T;
+  set data(x: T);
+}
+
+export namespace fs {
+  interface Node extends Atom<string> {
+  
+  }
+}
+
+export interface Path extends fs.Node {
+  constructor(p?: string | object): Path;
+
+  get name(): string;
+  get base(): string;
+}
+
+export interface File extends Atom<string> {
+  constructor(n?: string | object): File;
+
+  path(full?: boolean): string;
+  name(full?: boolean): string;
+
+  readable(): boolean;
+  writable(): boolean;
+}
+
+// ------------------------------------------------------------------------- *
+
+export namespace Module {
+
+  namespace Person {
+    type role = 'author' | 'maintainer' | 'contributor';
+  }
+
+  interface Person {
+    readonly data: object;
+    readonly name: string;
+    readonly mail: string;
+    readonly role: Person.role;
+  }
+
+  namespace Version {
+    interface Number {
+      string(): string;
+      number(): number;
+    }
+  }
+
+  interface Version {
+    readonly major: Version.Number;
+    readonly minor: Version.Number;
+    readonly patch: Version.Number;
+    string(): string;
+    readonly name: string;
+  }
+
+  interface Package {
+    readonly content: object;
+    readonly name: string;
+    readonly description: string;
+    readonly version: Version;
+    readonly license: string;
+    readonly author: Person;
+    readonly people: Person[];
+    readonly maintainers: Person[];
+    readonly contributors: Person[];
+  }
+
+  const initialized: boolean;
+
+  const object: Package;
+  const path: string;
+  const name: string;
+  const version: Version;
+  const description: string;
+
+  const author: Person;
+  const people: Person[];
+  const maintainers: Person[];
+  const contributors: Person[];
+
+  // ----------------------------------------------------------------------- *
+
+}

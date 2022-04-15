@@ -1,7 +1,7 @@
 /** ------------------------------------------------------------------------ *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/module
+ * @path cyko:nox/module:package
  * @file package.js
  * -----
  * The Package interface.
