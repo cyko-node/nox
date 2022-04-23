@@ -7,17 +7,21 @@
  * Package entry.
  ** ---------------------------------------------------------- */ 'use strict'
 
+export * from 'nox/util'
+export * from 'nox/base'
+export * from 'nox/fs'
+export * from 'nox/module' //'./module/index.js'
+
 function mesg(...args) { console.log(...args) }
 function line() { mesg('-----------') }
 function feed() { mesg() }
 
-
+mesg()
+/*
 import { Module } from 'nox/module' //'./module/index.js'
-
 mesg(Module.object.content)
 
 
-export * from 'nox/module' //'./module/index.js'
 
 
 
@@ -77,3 +81,4 @@ mesg(cwd())
   mesg('type:', f.type)
   line()
 })
+*/

@@ -1,16 +1,8 @@
 /** ------------------------------------------------------------------------ *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/base
- * @file constants.js
+ * @path cyko:nox/util
+ * @file index.js
  ** ---------------------------------------------------------- */ 'use strict'
 
-const platform = {
-  cross: 'cross',
-  win32: 'win32',
-  posix: 'posix',
-}
-
-// ------------------------------------------------------------------------ *
-
-export { platform }
+export * as path from './path/index.js'

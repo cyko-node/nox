@@ -3,15 +3,15 @@
   "description": "CYKO:NOX - Node Xtensions",
   "codename": "estrella",
   "version": "0.0.1",
-  "main": "./lib/nox.js",
-  "typefs": "./lib/nox.d.ts",
+  "main": "./code/lib/nox.js",
   "type": "module",
   "exports": {
-    ".": "./lib/nox.js",
-    "./globals": "./lib/globals.js",
-    "./base": "./lib/base/index.js",
-    "./fs": "./lib/fs/index.js",
-    "./module": "./lib/module/index.js"
+    ".": "./code/lib/nox.js",
+    "./base": "./code/lib/base/index.js",
+    "./util/path": "./code/lib/util/index.js",
+    "./util": "./code/lib/util/index.js",
+    "./fs": "./code/lib/fs/index.js",
+    "./module": "./code/lib/module/index.js"
   },
   "private": true,
   "license": "GPL-3.0-or-later",
@@ -21,9 +21,10 @@
     "url": "https://eggheadedmonkey.com"
   },
   "scripts": {
+    "test:special": "node code/lib/base/test.js",
     "nuke:windows": "pwsh nuke.ps1",
     "nuke:unix": "./nuke.sh",
-    "test:main": "node --trace-warnings lib/nox.js",
+    "test:main": "node --trace-warnings code/lib/nox.js",
     "prenuke:init": "npm run nuke",
     "pretest:redo": "npm run nuke:init",
     "premain:redo": "npm run nuke:init",
@@ -47,6 +48,7 @@
   ],
   "devDependencies": {
     "@types/node": "^17.0.23",
+    "@types/nox": "file:./code/types",
     "typescript": "^4.7.0-dev.20220406"
   }
 }

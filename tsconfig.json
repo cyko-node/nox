@@ -1,4 +1,6 @@
 {
+  //"extends": "./tsconfig.ambient.json",
+
   /*
    * Typesafety for JavaScript!
    */
@@ -6,39 +8,39 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "moduleResolution": "NodeNext", // depends on workspace ts setup .vsconfig
+    "moduleResolution": "NodeNext", // depends on workspace ts setup .vsconfig (npm install typescript@next)
+
     "resolveJsonModule": true,      // requires moduleResolution: "nodeish"
+    "allowSyntheticDefaultImports": true,
+
 
     /*
      * Setup strict typechecking, without compiling.
      */
 
+    "noEmit":  true, // don't compile anything (just perform typechecks).
     "allowJs": true, // use .js files (aswell as .ts)
     "checkJs": true, // enable typecheck on .js files
-    "noEmit":  true, // don't compile anything (just perform typechecks).
+
     "strict":  true, // enable strict typechecking.
     "strictNullChecks": true,  // enable null and undefined typechecking.
-    "noImplicitAny":    false, // enable the any type as falback.
+
+    "noImplicitAny": false, // enable the any type as falback.
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
 
     /*
      * Files / Paths.
      */
 
     "outDir": "./code/lib", // where the code resides.
-
-    // test
-    //"types": [ "./lib/nox.d.ts"],
-    //"rootDir": "./lib",
-    //"paths": { "*":[ "./types/nox/*" ] },
-    "typeRoots": [ "./code/types/", "./node_modules/@types/" ],
-
-    //"paths": { "*": [ "./node_modules/*", "./lib/types/*" ]}
   },
 
   /*
    * File filtering.
    */
 
-  "include": [ "./code/lib", "./code/types" ],
-  "exclude": [ "./code/bak" ],
+  "include": [ "./code/lib/**/*"  ],
+  "exclude": [ "./code/bak/**/*", "./code/types/**/*" ],
 }

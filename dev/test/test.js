@@ -1,6 +1,8 @@
 import { Module, initialize } from 'nox/module'
+import { Atom } from 'nox/base'
 
-console.log(platform.cross)
+console.log(platform.cross
+  )
 
 function log(...arg) { console.log(...arg) }
 function lol() { console.log('----------') }

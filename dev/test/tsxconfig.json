@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "rootDir": "./",
-    "paths": { "*":[ "./node_modules/nox/types/nox/*" ] },
-    "typeRoots": [ "./node_modules/nox/types/", "./node_modules/@types/" ],
-  },
-  "include": [ "./node_modules/nox/types/" ]
-}

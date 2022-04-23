@@ -39,9 +39,12 @@
   },
   "maintainers": [
     {
-       "name": "eggheadedmonkey",
+      "name": "eggheadedmonkey",
       "email": "cyko@eggheadedmonkey.com",
-        "url": "https://eggheadedmonkey.com"
+      "url": "https://eggheadedmonkey.com"
     }
-  ]
+  ],
+  "devDependencies": {
+    "@types/nox": "file:../../code/types"
+  }
 }

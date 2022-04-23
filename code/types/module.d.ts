@@ -55,8 +55,6 @@ declare module 'nox/module' {
     const people: Person[];
     const maintainers: Person[];
     const contributors: Person[];
-  
-    // ----------------------------------------------------------------------- *
-  
+
   }
 }

@@ -34,7 +34,7 @@ function initialize(attributes) {
   // ------ + -----------------------
   const has = (/** @type {Prop} */k) => { return Object.hasOwn(arg, k) }
   const pkg = (/** @type {Path} */p) => {
-    const s = read(p.data, { encoding: 'utf8' })
+    const s = read(p.core, { encoding: 'utf8' })
     const o = JSON.parse(s)
     return new Package(o)
   }
@@ -50,8 +50,8 @@ function initialize(attributes) {
   data = pkg(path)
 */
   var path = new Path(has('path')
-    ? arg.path || null
-    : env[arg.name || 'npm_package_json'] || null
+    ? arg.path || ''
+    : env[arg.name || 'npm_package_json'] || ''
   )
   var data = pkg(path)
 
