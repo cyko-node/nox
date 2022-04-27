@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+     "target": "esnext",
+     "module": "esnext",
+     /*
+      * Requires latest typescript.
+      * ---------------------------
+      * npm install typescript@next
+      * settings.json (.vscode/)
+      * {
+      *   "typescript.tsdk": "node_modules\\typescript\\lib"
+      * }
+      */
+     "moduleResolution": "NodeNext",
+  }
+}

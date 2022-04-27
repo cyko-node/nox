@@ -30,7 +30,24 @@ declare module 'nox/base' {
 
   // ---------------------------------------------------------------------- *
 
-  type Clonable<O> = {
+  type False = boolean;
+  type True = boolean;
+
+  type Valuable<T, F extends True | False> = F extends True
+    ? {
+      get core(): T;
+      //set core(v: T);
+    }
+    : {
+      core: T;
+    };
+
+  class Base<T> implements Valuable<T, false> {
+    get cotre(): T;
+    set core(v: T);
+  }
+
+  interface Clonable<O, T> {//extends Valuable<T> {
 
     /**
      * Constructs an identical ( deep ) copy of this object.
@@ -39,7 +56,7 @@ declare module 'nox/base' {
      */
 
     clone(): O;
-  };
+  }
 
   type Hookable<O> = {
 
@@ -57,7 +74,7 @@ declare module 'nox/base' {
 
   // ---------------------------------------------------------------------- *
 
-  class Atom<T> implements Clonable<Atom<T>>, Hookable<Atom<T>> {
+  class Atom<T> implements Clonable<Atom<T>, T>, Hookable<Atom<T>> {
     constructor(v: T);
 
     get core(): T;

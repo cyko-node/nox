@@ -1,45 +1,33 @@
 {
-  //"extends": "./tsconfig.ambient.json",
-
-  /*
-   * Typesafety for JavaScript!
-   */
+  "extends": "./tsconfig.module.esnext.json",
 
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "NodeNext", // depends on workspace ts setup .vsconfig (npm install typescript@next)
-
-    "resolveJsonModule": true,      // requires moduleResolution: "nodeish"
-    "allowSyntheticDefaultImports": true,
-
-
     /*
-     * Setup strict typechecking, without compiling.
+     * Check JavaScript.
+     * Don't generate or assume code.
      */
 
-    "noEmit":  true, // don't compile anything (just perform typechecks).
-    "allowJs": true, // use .js files (aswell as .ts)
-    "checkJs": true, // enable typecheck on .js files
+    "allowJs": true,
+    "checkJs": true,
 
-    "strict":  true, // enable strict typechecking.
-    "strictNullChecks": true,  // enable null and undefined typechecking.
-
-    "noImplicitAny": false, // enable the any type as falback.
+    "noImplicitAny": false, // enable non-explicit parameter types etc.
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
 
+    "noEmit": true, // don't generate code.
+    "strict": true, // check types.
+    "strictNullChecks": true, // check null and undefined.
+
     /*
-     * Files / Paths.
+     * Unsorted.
      */
 
-    "outDir": "./code/lib", // where the code resides.
+    "allowSyntheticDefaultImports": true, // enable import x from y
+    "resolveJsonModule": true, // requires "moduleResolution": "Node*"
   },
 
-  /*
-   * File filtering.
-   */
+  "files": [ ],
 
   "include": [ "./code/lib/**/*"  ],
   "exclude": [ "./code/bak/**/*", "./code/types/**/*" ],
