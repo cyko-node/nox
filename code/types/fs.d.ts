@@ -9,7 +9,7 @@ declare module 'nox/fs' {
    * @see `cyko nox/util: dirname`
    */
 
-  import { Core as Atom } from 'nox/base'
+  import { Atom } from 'nox/base'
 
   type PathCore = string;
 

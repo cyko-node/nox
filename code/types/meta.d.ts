@@ -4,43 +4,152 @@
 
 declare module 'nox/meta' {
   namespace help {
+    namespace struct { type key = number|string|symbol; }
+    namespace vector { type key = number; }
+
+    type vector = any[];
+    type struct = { [I in struct.key]: any; };
   }
 
   global {
-    namespace meta {
-      type index<T>
-        = T extends boolean | bigint | string | symbol ? never
-        : T extends number ? T
-        : T extends (infer E)[] ? number
-        : T extends {} ? number | string | symbol : never;
-
-      const xcv: {
-        struct: {
-          a: index<{}>;
-          b: index<struct>;
-          c: index<Object>;
-        }
-        vector: {
-          a: index<[]>;
-          b: index<string[]>;
-          c: index<vector>;
-          d: index<vector<string>>;
-          e: index<Array<any>>;
-        }
-        index: {
-          a: index<1>;
-          b: index<0.1>;
-          c: index<'a'>
-        }
-      }
-
+    namespace type {
+      type key<T>
+        = T extends help.vector ? number
+        : T extends help.struct ? number|string|symbol : never;
 
       type vector<T = any> = T[];
-      type struct<I extends index<{}> = index<{}>, T = any> = {
-        [X in I]: T;
+      type struct<T = any, K extends key<{}> = key<{}>> = {
+        [I in K]: T;
       };
 
+      type list<T> = vector<T>;
+      type dict<T> = struct<T | undefined>;
 
+/*
+      type property<T, Name extends key<{}>> = {
+        [I in Name]: T;
+      };
+
+      type callable<T, Name extends key<{}>>
+        = attr.callable<struct<T, Name>>
+      type readonly<T, Name extends key<{}>>
+        = attr.readonly<property<T, Name>>
+      type optional<T, Name extends key<{}>>
+        = attr.optional<property<T, Name>>
+
+  
+      namespace attr {
+        type callable<T, X extends boolean = true>
+          = X extends true
+          ? { [Property in keyof T]:() => T[Property]; }
+          : { [Property in keyof T]: T[Property]; }
+
+        type readonly<T, X extends boolean = true>
+          = X extends true
+          ? { +readonly [Property in keyof T]: T[Property]; }
+          : { -readonly [Property in keyof T]: T[Property]; };
+
+        type optional<T, X extends boolean = true>
+          = X extends true
+          ? { [Property in keyof T]+?: T[Property]; }
+          : { [Property in keyof T]-?: T[Property]; };
+      }
+*/
+      namespace attr {
+        type defaults = 'defaults';
+        type optional = 'optional';
+        type readonly = 'readonly';
+      }
+
+      namespace set {
+        type readonly<T, X extends attr.defaults|attr.optional|attr.readonly>
+          = [X] extends [attr.defaults]
+          ? { -readonly [Property in keyof T]: T[Property]; }
+          : { +readonly [Property in keyof T]: T[Property]; }
+
+        type optional<T, X extends attr.defaults|attr.optional|attr.readonly>
+          = [X] extends [attr.defaults]
+          ? { [Property in keyof T]-?: T[Property]; }
+          : { [Property in keyof T]+?: T[Property]; }
+      }
+
+      type t = property<number, 'test'>
+
+      type set<T, X extends attr.defaults|attr.optional|attr.readonly>
+        = [X] extends [attr.optional]
+        ? set.optional<T, attr.optional>
+        : [X] extends [attr.readonly]
+        ? set.readonly<T, attr.readonly>
+        : [X] extends [attr.optional | attr.readonly]
+        ? set.optional<set.readonly<T, attr.readonly>, attr.optional>
+
+        : [X] extends [attr.defaults]
+        ? set.readonly<T, attr.defaults>
+        : [X] extends [attr.optional | attr.defaults]
+        ? set.optional<set.readonly<T, attr.defaults>, attr.optional>
+        : [X] extends [attr.readonly | attr.defaults]
+        ? set.readonly<set.optional<T, attr.defaults>, attr.readonly>
+
+        : never;
+
+
+      type property<T, Name extends key<{}>> = {
+        [I in Name]: T;
+      };
+
+      type callable<T, Name extends key<{}>> = {
+        [I in Name]:() => T;
+      };
+
+      type hyryj = callable<number, 'jvfgg'>
+
+      type readonly<T, Name extends key<{}>>
+        = set.readonly<property<T, Name>, attr.readonly>
+      type optional<T, Name extends key<{}>>
+        = set.optional<property<T, Name>, attr.optional>
+
+      type xfdhh = {
+        a: set<t, attr.optional>
+        b: set<t, attr.readonly>
+        c: set<t, attr.defaults>
+        d: set<t, attr.optional | attr.readonly>
+        e: set<t, attr.readonly | attr.optional>
+        f: set<t, attr.optional | attr.defaults>
+        g: set<t, attr.defaults | attr.optional>
+        h: set<t, attr.readonly | attr.defaults>
+        i: set<t, attr.defaults | attr.readonly>
+      }
+    }
+  }
+
+  const xcv: {
+    struct: {
+      a: type.key<{}>;
+      b: type.key<type.struct>;
+      c: type.key<Object>;
+      d: type.key<{ a:any }>;
+    }
+    vector: {
+      a: type.key<[]>;
+      b: type.key<string[]>;
+      c: type.key<type.vector>;
+      d: type.key<type.vector<string>>;
+      e: type.key<Array<any>>;
+      f<T>(): type.key<Array<T>>
+    }
+    others: {
+      a: type.key<1>;
+      b: type.key<0.1>;
+      c: type.key<'a'>;
+      d: type.key<boolean>;
+      e: type.key<any>;
+      f: type.key<never>;
+      g: type.key<string>;
+    }
+  }
+}
+
+/*
       type expression<T> = {
         self: expression<T>;
         type: T;
@@ -51,14 +160,14 @@ declare module 'nox/meta' {
         ? U
         : T;
 
-      type select<T extends struct, K extends index<struct>> = expression<T[K]>;
+      type select<T extends struct, K extends index<{}>> = expression<T[K]>;
 
       namespace name {
         type of<T>
-          = T extends struct<infer K, infer U>
+          = T extends select<infer S, infer K>
           ? K // the actual property names!!
-          : T extends select<infer S, infer K>
-          ? S[K]
+          : T extends struct<infer U, infer K>
+          ? K
           : never;
 
         const o: of<1>
@@ -73,24 +182,38 @@ declare module 'nox/meta' {
         t: name.of<{1:boolean;x:string}>
       }
 
-      namespace type {
+      namespace typhe {
+        type as<T>
+          = T extends (...args: any) => infer R
+          ? R
+          : T;
+
         type of<T>
           = T extends expression<infer U>
-          ? expression<T>
-          : T extends vector<infer U>
           ? U
-          : T extends struct<infer K, infer U>
-          ? T[keyof T]
-          : T; //type<T>;
+          : T extends vector<infer U>
+          ? T[number] extends never ? [] : U
+          : T extends struct
+          ? T[keyof T] extends never ? {} : T[keyof T]
+          
+          : T | 4; //type<T>;
       }
 
+      function tf(): struct;
+      type tft = () => number;
+
       const to: {
-        o: type.of<select<{1:string; aab:number}, 'aab'>>,
-        p: type.of<select<{1:boolean}, 1>>,
-        q: type.of<vector<number>>,
-        r: type.of<boolean[]>,
-        s: type.of<Array<string>>,
-        t: type.of<{1:boolean;x:string}>
+        m: type.of<{}>
+        n: type.of<{1:boolean;x:string}>
+        o: type.of<select<{1:string; aab:number}, 'aab'>>
+        p: type.of<select<{1:boolean}, 1>>
+        q: type.of<vector<number>>
+        r: type.of<boolean[]>
+        s: type.of<Array<string>>
+        t: type.of<[]>
+        x: type.as<typeof tf>
+        y: type.of<tft>
+        z: typeof tf
       }
 
       const ka: index<{a:number}>;
@@ -129,11 +252,7 @@ declare module 'nox/meta' {
 
       const cc: property<{a, dict:boolean}, 'dict'>
       const bb: property<{a:boolean, 1:string, g:bigint}>
-    }
-  }
-}
-
-
+      */
 
 
 
@@ -197,11 +316,7 @@ declare module 'nox/meta' {
         = T extends list.type ? list.element<T>
         : T extends dict.type ? dict.element<T, K>
         : T;
-    
 
-
-
-      
       //#region test ---------------------------------
 
       class a  {
@@ -242,37 +357,4 @@ declare module 'nox/meta' {
         readonly [key: string]: T | undefined;
       }
       // -------------------------------------
-    
-      /*
-
-      namespace result {
-        type false_t = 0;
-        type true_t  = 1;
-      }
-
-      type is_dict<T, L = T, R = T> = select<
-        pair<T, dict>,
-        L,
-        R
-      >;
-
-      type is_structure<T> = T extends t.dict
-        ? result.true_t
-        : result.false_t
-
-      type o = { a: 123, b: 'xyz', 3.3: object, true: string, boolean: 'true', string; };
-      type l = number[];
-
-      type o0 = element<o, 'a'>
-      type o1 = element<o, 'b'>
-      type o2 = element<o, 3.3>
-      type o3 = element<o, 'true'>
-      type o4 = element<o, 'boolean'>
-      type o5 = element<o, 'string'>
-
-  
-      type s = is_structure<o>
-      type d = is_dict<o>
-      type x = element<o, 1>
-      type y = element<o, 2>
     */

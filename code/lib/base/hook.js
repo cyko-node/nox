@@ -6,14 +6,14 @@
  ** --------------------------------------------------------- */ 'use strict'
 
 /**
- * namespace Hook (virtual)
+ * namespace Hook ( virtual )
  */
 
-var Hook = undefined
+const Hook = undefined
 
 /**
  * interface hook
- *//**
+ *
  * @type {import('nox/base').hook}
  */
 

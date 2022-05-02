@@ -1,10 +1,8 @@
 /** ----------------------------------------------------------------------- *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/base
+ * @path cyko:nox/core
  * @file index.js
  ** --------------------------------------------------------- */ 'use strict'
-export * from './abstract.js'
-export * from './toggable.js'
-export * from './hook.js'
-export * from './atom.js'
+
+export * from './platform.js'

@@ -3,6 +3,8 @@
  */
 
 declare module 'nox' {
+  export * from 'nox/core'
+
   export * from 'nox/util'
 
   export * from 'nox/base'

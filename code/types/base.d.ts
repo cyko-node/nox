@@ -13,41 +13,37 @@
  */
 
 declare module 'nox/base' {
-  namespace Hook {
-    type Name = 'cloner' | 'getter' | 'setter';
-    type Link<O, R = any> = (self: O, ...args: any[]) => R;
+  interface Valuable<T> extends type.callable<T, 'value'> {} //extends type.member<'value', T, true> {}
 
-    type Impl = { [K in Name]: `hook:${K}`; };
+  interface Toggable extends Valuable<boolean> {
+    toggle(): boolean;
+    on(): boolean;
+    off(): boolean;
+    status(): boolean;
   }
 
-  interface hook {
-    cloner: Hook.Name;
-    getter: Hook.Name;
-    setter: Hook.Name;
+  class Link {
+    
   }
-
-  const hook: hook
 
   // ---------------------------------------------------------------------- *
 
-  type False = boolean;
-  type True = boolean;
-
-  type Valuable<T, F extends True | False> = F extends True
-    ? {
-      get core(): T;
-      //set core(v: T);
-    }
-    : {
-      core: T;
-    };
-
-  class Base<T> implements Valuable<T, false> {
-    get cotre(): T;
-    set core(v: T);
+  namespace Hook {
+    type Name = 'getter' | 'setter' | 'cloner';
+    type Link<T, R = any> = (self: T, ...args: any[]) => R;
   }
 
-  interface Clonable<O, T> {//extends Valuable<T> {
+  type hook = {
+    [K in Hook.Name]: K;
+  };
+
+  const hook: hook;
+
+  // ---------------------------------------------------------------------- *
+
+
+
+  interface Clonable<T> {
 
     /**
      * Constructs an identical ( deep ) copy of this object.
@@ -55,10 +51,10 @@ declare module 'nox/base' {
      * *Implementations may vary.*
      */
 
-    clone(): O;
+    clone(): T;
   }
 
-  type Hookable<O> = {
+  interface Hookable<T> {
 
     /**
      * Bind a function ( link ) to a method ( hook ).
@@ -69,12 +65,12 @@ declare module 'nox/base' {
      * @param link The `link` function.
      */
 
-    hook(name: Hook.Name, link: Hook.Link<O>): void;
-  };
+    hook(name: Hook.Name, link: Hook.Link<T>): void;
+  }
 
   // ---------------------------------------------------------------------- *
 
-  class Atom<T> implements Clonable<Atom<T>, T>, Hookable<Atom<T>> {
+  class Atom<T> implements Clonable<Atom<T>>, Hookable<Atom<T>> {
     constructor(v: T);
 
     get core(): T;

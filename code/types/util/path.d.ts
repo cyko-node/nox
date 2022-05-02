@@ -22,7 +22,7 @@ declare module 'nox/util/path' {
    * @param e Optional extension to remove from the result.
    */
 
-  export function basename(p: string, e?: string): string;
+  function basename(p: string, e?: string): string;
 
   /**
    * `original documentation`
@@ -33,7 +33,7 @@ declare module 'nox/util/path' {
    * @param p The path to evaluate.
    */
 
-  export function dirname(p: string): string;
+  function dirname(p: string): string;
 
   /**
    * `original documentation`
@@ -46,7 +46,7 @@ declare module 'nox/util/path' {
    * @param p The path to evaluate.
    */
 
-  export function extname(p: string): string;
+  function extname(p: string): string;
 
   /**
    * `original documentation`
@@ -59,7 +59,7 @@ declare module 'nox/util/path' {
    * @param p The path to normalize.
    */
 
-  export function normalize(p: string): string;
+  function normalize(p: string): string;
 
   /**
    * Returns the ( platform specific ) path-separator: `/` or `\`
@@ -67,7 +67,7 @@ declare module 'nox/util/path' {
    * @param p Optional platform name. Default is the current platform.
    */
 
-  export function separator(p?: NodeJS.Platform): string;
+  function separator(p?: NodeJS.Platform): string;
 
   /**
    * Returns the ( platform specific ) path-delimiter: `:` or `;` 
@@ -75,5 +75,5 @@ declare module 'nox/util/path' {
    * @param p Optional platform name ( default: cutrent platform ).
    */
 
-  export function delimiter(p?: NodeJS.Platform): string;
+  function delimiter(p?: NodeJS.Platform): string;
 }
