@@ -10,11 +10,14 @@
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  */
 
+
 declare module 'nox/util/path' {
+
   /**
+   * Returns the last portion / segment of a path.
+   *
    * `original documentation`
    *
-   * Returns the last portion / segment of a path.  
    * Similar to the Unix basename command.  
    * Often used to extract the file name from a fully qualified path.
    *
@@ -25,6 +28,8 @@ declare module 'nox/util/path' {
   function basename(p: string, e?: string): string;
 
   /**
+   * Returns the directory name, ie everything but the base.
+   *
    * `original documentation`
    *
    * Return the directory name of a path.  

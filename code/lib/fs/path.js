@@ -11,10 +11,10 @@ import * as libpath from 'path'
 
 // ------------------------------------------------------------------------ *
 
-import { Atom } from 'nox/base' //'../../base/index.js'
+import { Atom } from 'nox/base'
 import { path } from 'nox/util'
 
-import { PathCore } from 'nox/fs'
+import { Path as P } from 'nox/fs'
 
 // ------------------------------------------------------------------------ *
 
@@ -26,30 +26,72 @@ const help = {
 }
 
 /**
- * @extends Atom<PathCore>
+ * @implements {P}
+ * @extends {Atom<String>}
  */
 
 class Path extends Atom {
-  #list // portions (segments)
+  constructor(x) {
+    if (x instanceof Path ||
+       (x instanceof Atom && typeof x.core === 'string')
+    ) {
+      super(x.core)
+    } else {
+      super(String(x))
+    }
+  }
+
+  name(n = false) {
+    if (n) {
+      return help.dirname(help.normalize(this.core))
+    } else {
+      return help.dirname(this.core)
+    }
+  }
+
+  base(e) {
+    return help.basename(this.core, e)
+  }
+
+  string(n = false) {
+    if (n) {
+      return help.normalize(this.core)
+    } else {
+      return this.core
+    }
+  }
+
+  vector() {
+    return this.core.split(/[\\/]/).filter((v) => {
+      return v.length > 0 // skip empty strings
+    })
+  }
+}
+
+export { Path }
+/* *
+ * @implements {Atom<Path, PathCore>}
+ *
+
+class Path {
+  #core // <PathCore>
+  #list // <PathCore[]> portions (segments)
 
   constructor(x) {
     const s = String(x)
-
-    if (x === undefined) {
-      throw new Error('Path(x: string) x = undefined!')
-    }
-    if (x == null) {
-      throw new Error('Path(x: string) x = null')
-    }
-    if (s.length < 1) {
-      throw new Error('Path(x: string) x = ""')
-    }
-
-    super(s)
-
+    this.#core = s
     this.#list = s.split(/[\\/]/).filter((v) => {
       return v.length > 0 // skip empty strings
     })
+  }
+
+  clone() {
+    return new Path(this)
+  }
+
+
+  get core() {
+    return this.#core
   }
 
   name(n = false) {
@@ -97,3 +139,4 @@ class File extends Atom {
 
 export { File }
 export { Path }
+*/

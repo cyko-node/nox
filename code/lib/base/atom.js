@@ -6,90 +6,57 @@
  ** ---------------------------------------------------------- */ 'use strict'
 
 //#region imports ---------------------------------------------------------- *
-import { Hook, hook, Clonable, Hookable } from 'nox/base'
+import { Atom as Type } from 'nox/base'
 //#endregion
-
 
 /**
  * @template T
- * @implements {Clonable<Atom<T>>}
- * @implements {Hookable<Atom<T>>}
+ * @implements {Type<T>}
  */
 
 class Atom {
-  /**
-   * @typedef {Hook.Link<Atom<T>, Atom<T>>} Cloner
-   * @typedef {Hook.Link<Atom<T>, void>} Getter
-   * @typedef {Hook.Link<Atom<T>, T>} Setter
-   *//**
-   * @typedef {Hook.Link<Atom<T>>} Link `Cloner` | `Getter` | `Setter`
-   * @typedef {Hook.Name} Name
-   */
+  #core//<T>
 
-  /**
-   * The encapsulated data.
-   * @type {T}
-   */
-
-  #core
-  #link = {
-    cloner: false,
-    getter: false,
-    setter: false,
-  }
-  #hoox = {
-  /** @type {Cloner} */cloner: (...x) => { return new Atom(this.#core) },
-  /** @type {Getter} */getter: (...x) => { return },
-  /** @type {Setter} */setter: (...x) => { return x[1] },
-  }
-
-  constructor(/** @type {T} */v) {
-    if (v instanceof Atom) {
-      this.#core = v.#core
+  constructor(x) {
+    if (x instanceof Atom)
+    {
+      this.#core = x.#core
     } else {
-      this.#core = v
-    }
-  }
-
-  get core() {
-    if (!this.#link.getter) {
-      this.#link.getter = true
-      this.#hoox.getter(this, this.#core)
-      this.#link.getter = false
-    }
-
-    return this.#core
-  }
-
-  set core(/** @type {T} */v) {
-    if (!this.#link.setter) {
-      this.#link.setter = true
-      this.#core = this.#hoox.setter(this, v)
-      this.#link.setter = false
-    } else {
-      this.#core = v
+      this.#core = x === undefined ? null : x
     }
   }
 
   clone() {
-    return this.#hoox.cloner(this, this.#core)
+    return new Atom(this)
   }
 
-  /**
-   * @param {Name} name 
-   * @param {Link} link 
+  equals(that) {
+    if (that instanceof Atom)
+    {
+      return this.#core === that.#core
+    } else { throw new Error('incompatible!') }
+  }
+
+  swap(that) {
+    if (that instanceof Atom)
+    {
+      const temp = this.#core
+      // ------- + ----
+      this.#core = that.#core
+      that.#core = temp
+      // ------- + ----
+      return that
+    } else { throw new Error('incompatible!') }
+  }
+
+  /*
+   | Getter / Setter
    */
 
-  hook(name, link) {
-    switch (name) {
-      case hook.cloner: { this.#hoox.cloner = link } break
-      case hook.getter: { this.#hoox.getter = link } break
-      case hook.setter: { this.#hoox.setter = link } break
-    }
-  }
+  get core() { return this.#core }
+  set core(v) { this.#core = v }
 }
 
-
-//#region exports --------------------------------------------------------- *
+//#region exports ---------------------------------------------------------- *
 export { Atom }
 //#endregion

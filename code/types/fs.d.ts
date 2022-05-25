@@ -11,52 +11,41 @@ declare module 'nox/fs' {
 
   import { Atom } from 'nox/base'
 
-  type PathCore = string;
-
   /**
    * Represents a filesystem directory node.
    */
 
-  class Path extends Atom<PathCore> {
-    constructor(x: PathCore | Path);
+  export class Path extends Atom<string> {
+    constructor(x: string | Path | Atom<String>);
 
-    /**
-     * The complete path.
-     */
-
-    public get data(): PathCore;
-    protected get path(): PathCore;
+    readonly core: string;
 
     /**
      * Returns the directory name, ie everything but the base.
-     * 
-     * @see `nox/util dirname`
-     * 
      * @param n Normalize? `default: false`
      */
   
-    name(n?: boolean): PathCore;
+    name(n?: boolean): string;
 
     /**
-     * Returns the last portion ( segment ) of the path.
-     *
-     * @see {@link external:nox/util x}
-     * ```js
-     * import { basename } from 'nox/util'
-     * ```
-     * 
+     * Returns the last portion / segment of the path.
      * @param e Optional extension to remove from the result.
      */
 
-    base(e?: string): PathCore;
+    base(e?: string): string;
 
     /**
-     * Returns the complete path in normalized form.
-     *
-     * @see `nox/util normalize`
+     * Returns the complete path as a string.
+     * @param n Normalize? `default: false`
      */
 
-    normalize(): PathCore;
+    string(n?: boolean): string;
+
+    /**
+     * Returns the complete path as a vector.
+     */
+
+    vector(): string[];
   }
 
   /**
@@ -64,24 +53,9 @@ declare module 'nox/fs' {
    */
 
   class File {
-    constructor(x: string | Path | Atom<Path>);
-
-    /**
-     * The {@link Path} object.
-     */
-
+    constructor(x: string | Path);
     get path(): Path;
-
-    /**
-     * The complete name ( including extension ).
-     */
-
     get name(): string;
-
-    /**
-     * The type / extension.
-     */
-
     get type(): string;
   }
 

@@ -1,5 +1,5 @@
 /**
- * Provides a set of basic utilities.
+ * Provides the base set of utilities used throughout the lib.
  *
  * ```js
  * import * as util from 'nox/util'
@@ -10,8 +10,6 @@
  */
 
 declare module 'nox/util' {
-
+  export * as misc from 'nox/util/misc'
   export * as path from 'nox/util/path'
-  export * from 'nox/util/path'
-
 }

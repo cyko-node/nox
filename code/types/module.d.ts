@@ -3,8 +3,7 @@
  */
 
 declare module 'nox/module' {
-  export namespace Module {
-
+  namespace Module {
     namespace Person {
       type role = 'author' | 'maintainer' | 'contributor';
     }
@@ -42,7 +41,7 @@ declare module 'nox/module' {
       readonly maintainers: Person[];
       readonly contributors: Person[];
     }
-  
+
     const initialized: boolean;
   
     const object: Package;
@@ -55,6 +54,5 @@ declare module 'nox/module' {
     const people: Person[];
     const maintainers: Person[];
     const contributors: Person[];
-
   }
 }

@@ -1,10 +1,7 @@
 .git
 .gitignore
 .vscode
-jsconfig.json
-**/bak/
-**/bak.*
 **/*.ps1
 **/*.sh
 **/*.bash
-**/lib/void/
+**/bak/**/*

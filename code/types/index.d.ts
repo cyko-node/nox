@@ -1,5 +1,6 @@
 /// <reference path="globals.d.ts" />
 /// <reference path="meta.d.ts" />
+/// <reference path="util/misc.d.ts" />
 /// <reference path="util/path.d.ts" />
 /// <reference path="util.d.ts" />
 /// <reference path="base.d.ts" />

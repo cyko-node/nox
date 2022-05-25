@@ -1,10 +1,12 @@
 /** ----------------------------------------------------------------------- *
  * @author eggheadedmonkey <cyko@eggheadedmonkey.com>
  * ----—
- * @path cyko:nox/base
+ * @path cyko:nox/core
  * @file index.js
  ** --------------------------------------------------------- */ 'use strict'
 
+import { type } from 'os'
+import { platform } from 'process'
 /**
  * @type {typeof import('nox/core').Platform.Name}
  */
@@ -39,6 +41,14 @@ const Type = {
 const Platform = {
   Name: Name,
   Type: Type,
+
+  name:() => { return platform },
+  type:() => {
+    switch (platform) {
+      case Platform.Name.win32: return Type.dos
+      default: return Type.nix
+    }
+  }
 }
 
 //#region exports --------------------------------------------------------- *

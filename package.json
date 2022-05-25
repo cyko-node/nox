@@ -7,9 +7,10 @@
   "type": "module",
   "exports": {
     ".": "./code/lib/nox.js",
-    "./core": "./code/lib/core/index.js",
+    "./globals": "./code/lib/globals/index.js",
     "./base": "./code/lib/base/index.js",
-    "./util/path": "./code/lib/util/index.js",
+    "./util/misc": "./code/lib/util/misc/index.js",
+    "./util/path": "./code/lib/util/path/index.js",
     "./util": "./code/lib/util/index.js",
     "./fs": "./code/lib/fs/index.js",
     "./module": "./code/lib/module/index.js"
